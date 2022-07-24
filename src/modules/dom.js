@@ -1,6 +1,7 @@
 import { myListener as Listener } from "./listener";
 import { myData as Data } from "./data";
 import { Task } from "./task";
+import  deleteIcon  from "../assets/delete-svgrepo-com.svg";
 const Dom = () => {
 	function openForm() {
 		const taskInputForm = document.querySelector(".task-input-form");
@@ -36,11 +37,15 @@ const Dom = () => {
 			"justify-between",
 			"p-3",
 		];
-		const taskContainer = document.createElement("div")
-        taskContainer.classList.add(...taskContainerClasses);
+		const taskContainer = document.createElement("div");
+		taskContainer.classList.add(...taskContainerClasses);
 
-		// Box div, to coantain checkbox and name
-		const boxDiv = document.createElement("div");
+		// Box div, to contain checkbox and name
+		const boxDiv1 = document.createElement("div");
+		// Box div, to contain due date input and delete button
+		const boxDiv2Classes = ["flex", "justify-between", "w-[27%]"];
+		const boxDiv2 = document.createElement("div");
+		boxDiv2.classList.add(...boxDiv2Classes);
 
 		// Checkbox Icon
 		const checkBoxInputClasses = [
@@ -75,15 +80,25 @@ const Dom = () => {
 
 		dueDateInput.value = newTask.myTask.dueDate;
 
-		// Appending to parent
-		boxDiv.append(checkBoxInput, taskNameSpan);
+		// Delte task Icon button
+		const deleteTaskIconClasses = ["h-9", "w-9"];
+		const deleteTaskIcon = document.createElement("img");
+		deleteTaskIcon.src = deleteIcon;
+		deleteTaskIcon.alt = "Delete Task Icon";
+		deleteTaskIcon.classList.add(...deleteTaskIconClasses);
 
-		taskContainer.append(boxDiv, dueDateInput);
+		// Appending to parent
+		boxDiv1.append(checkBoxInput, taskNameSpan);
+
+		boxDiv2.append(dueDateInput, deleteTaskIcon);
+
+
+        taskContainer.append(boxDiv1, boxDiv2);
 
 		// Appending to the main parent
-        document.querySelector('.tasks-grid-container').appendChild(taskContainer);
+		document.querySelector(".tasks-grid-container").appendChild(taskContainer);
 		// const parentGridContainer = document.querySelector(".tasks-grid-container");
-        // parentGridContainer.appendChild(taskContainer);
+		// parentGridContainer.appendChild(taskContainer);
 	}
 
 	return { openForm, closeForm, createNewTask };
