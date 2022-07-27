@@ -16,15 +16,8 @@ const Dom = () => {
 	}
 
 	function createNewTask() {
+        // Ojbect of task factory
 		const newTask = Task();
-
-		// <div class=" bg-white border-2 border-solid border-black h-max flex items-center justify-between p-3">
-		//                 <div class="">
-		//                     <input type="checkBoxInput" name="task-status" id="task-status" class="appearance-none w-4 h-4 rounded-lg">
-		//                     <span class=" task-name ml-2">Do gardening</span>
-		//                 </div>
-		//                 <input type="date" name="task-due-date" id="task-due-date" value="2018-07-22" class="border-2 border-gray-500 border-solid p-1">
-		//             </div>
 
 		const taskContainerClasses = [
 			"bg-white",

@@ -9,7 +9,7 @@ const Data = () => {
 		return { title, dueDate, description, priority, priority, project };
 	};
 
-	return { getDatafromForm };
+	return { getDatafromForm};
 };
 
 const myData = Data();
