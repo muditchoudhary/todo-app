@@ -1,6 +1,3 @@
-import { myListener as Listener } from "./listener";
-import { myData as Data } from "./data";
-import { Task } from "./task";
 import  deleteIcon  from "../assets/delete-svgrepo-com.svg";
 const Dom = () => {
 	function openForm() {
@@ -15,10 +12,7 @@ const Dom = () => {
 		taskInputForm.classList.add("hidden");
 	}
 
-	function createNewTask() {
-        // Ojbect of task factory
-		const newTask = Task();
-
+	function createTask(task) {
 		const taskContainerClasses = [
 			"bg-white",
 			"border-2",
@@ -56,7 +50,7 @@ const Dom = () => {
 		// Task Name
 		const taskNameSpan = document.createElement("span");
 		taskNameSpan.classList.add("ml-2");
-		taskNameSpan.textContent = newTask.myTask.title;
+		taskNameSpan.textContent = task.title;
 
 		// Task Due Date
 		const dueDateInputClasses = [
@@ -71,10 +65,10 @@ const Dom = () => {
 		dueDateInput.name = "task-due-date";
 		dueDateInput.id = "task-due-date";
 
-		dueDateInput.value = newTask.myTask.dueDate;
+		dueDateInput.value = task.dueDate;
 
 		// Delte task Icon button
-		const deleteTaskIconClasses = ["h-9", "w-9"];
+		const deleteTaskIconClasses = ["h-9", "w-9", "cursor-pointer"];
 		const deleteTaskIcon = document.createElement("img");
 		deleteTaskIcon.src = deleteIcon;
 		deleteTaskIcon.alt = "Delete Task Icon";
@@ -94,9 +88,7 @@ const Dom = () => {
 		// parentGridContainer.appendChild(taskContainer);
 	}
 
-	return { openForm, closeForm, createNewTask };
+	return { openForm, closeForm, createTask };
 };
 
-const myDom = Dom();
-
-export { myDom };
+export { Dom };

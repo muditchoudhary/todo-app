@@ -64,9 +64,8 @@ const Data = () => {
         setLocalTaskData('generalTasksData', tasksDataStringify);
     }
 
-	return { getDatafromForm, storeTasksLocally};
+	return { getDatafromForm, storeTasksLocally, convertStringToObject, convertObjectToString};
 };
 
-const myData = Data();
 
-export { myData };
+export { Data };

@@ -1,15 +1,30 @@
-import { data } from "autoprefixer";
-import { myData as Data } from "./data";
+import { Data } from "./data";
+import { Dom } from "./dom";
+
 const Task = () => {
-    
-    // Properties
-    // Data object from data.js, contains form inputs data
-    const myTask = Data.getDatafromForm();
-    Data.storeTasksLocally(myTask);
-    
-	return { myTask };
+	const isTaskPrsentLocally = () => {
+		return Object.keys(localStorage).length !== 0 ? true : false;
+	};
+
+    const createNewTask = () => {
+        /**
+         * Get values from the form fields
+         * Store the task into the localStorage
+         * Create a task element in the page
+         */
+        const myTask = dataObj.getDatafromForm();
+        dataObj.storeTasksLocally(myTask);
+        domObj.createTask(myTask);
+
+    }
+
+	return { createNewTask, isTaskPrsentLocally };
 };
 
+// Dom object
+const domObj = Dom();
 
+// Data object
+const dataObj = Data();
 
 export { Task };

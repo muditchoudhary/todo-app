@@ -8,5 +8,5 @@ const Listener = () => {
 	return { listenClickOnElements };
 };
 
-const myListener = Listener();
-export { myListener };
+
+export { Listener };
