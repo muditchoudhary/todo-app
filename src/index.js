@@ -1,11 +1,20 @@
 import "./style.css";
-import { myDom as Dom } from "./modules/dom";
-import { myListener as Listener } from "./modules/listener";
-import { myData as Data } from "./modules/data";
+import { Dom } from "./modules/dom";
+import { Listener } from "./modules/listener";
+import { Data } from "./modules/data";
+import {Task} from "./modules/task";
 
-Listener.listenClickOnElements(".add-task", () => {Dom.openForm()});
-Listener.listenClickOnElements(".close", () => {Dom.closeForm()});
-Listener.listenClickOnElements(".cancel", () => {Dom.closeForm()});
-Listener.listenClickOnElements(".confirm-add-task-btn", () => {Dom.createNewTask()});
+// Checking if there are task stored locally
+const taskObj = Task();
+console.log(taskObj.isTaskPrsentLocally());
 
-console.log("working");
+// Listener object
+const litenerObj = Listener();
+
+// Dom object 
+const domObject = Dom();
+
+litenerObj.listenClickOnElements(".add-task", () => {domObject.openForm()});
+litenerObj.listenClickOnElements(".close", () => {domObject.closeForm()});
+litenerObj.listenClickOnElements(".cancel", () => {domObject.closeForm()});
+litenerObj.listenClickOnElements(".confirm-add-task-btn", () => {(taskObj.createNewTask())});
