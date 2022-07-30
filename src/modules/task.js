@@ -3,8 +3,22 @@ import { Dom } from "./dom";
 
 const Task = () => {
 	const isTaskPrsentLocally = () => {
+        /**
+         * Check if tasks are present locally in localStorage
+         */
 		return Object.keys(localStorage).length !== 0 ? true : false;
 	};
+
+    const renderLocalTask = () => {
+        const localStorageKeys = Object.keys(localStorage);
+        localStorageKeys.forEach((key) => {
+            let tasks = dataObj.convertStringToObject(localStorage[key]);
+            let tasksKeys = Object.keys(tasks);
+            tasksKeys.forEach((key) => {
+                domObj.createTask(tasks[key]);
+            })
+        })
+    }
 
     const createNewTask = () => {
         /**
@@ -18,7 +32,7 @@ const Task = () => {
 
     }
 
-	return { createNewTask, isTaskPrsentLocally };
+	return { createNewTask, isTaskPrsentLocally, renderLocalTask };
 };
 
 // Dom object

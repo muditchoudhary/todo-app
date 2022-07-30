@@ -5,8 +5,9 @@ import { Data } from "./modules/data";
 import {Task} from "./modules/task";
 
 // Checking if there are task stored locally
+// if yes then render them first
 const taskObj = Task();
-console.log(taskObj.isTaskPrsentLocally());
+taskObj.isTaskPrsentLocally() ? taskObj.renderLocalTask() : NaN;
 
 // Listener object
 const litenerObj = Listener();
