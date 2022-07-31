@@ -1,4 +1,4 @@
-import  deleteIcon  from "../assets/delete-svgrepo-com.svg";
+import deleteIcon from "../assets/delete-svgrepo-com.svg";
 const Dom = () => {
 	function openForm() {
 		const taskInputForm = document.querySelector(".task-input-form");
@@ -47,6 +47,8 @@ const Dom = () => {
 		checkBoxInput.name = "task-status";
 		checkBoxInput.id = "task-status";
 
+		// Task unique id
+		taskContainer.setAttribute("data-unique-id", task.uniqueId);
 		// Task Name
 		const taskNameSpan = document.createElement("span");
 		taskNameSpan.classList.add("ml-2");
@@ -68,22 +70,30 @@ const Dom = () => {
 		dueDateInput.value = task.dueDate;
 
 		// Delte task Icon button
-		const deleteTaskIconClasses = ["h-9", "w-9", "cursor-pointer"];
+		const deleteTaskIconClasses = [
+			"delete-btn",
+			"h-9",
+			"w-9",
+			"cursor-pointer",
+		];
 		const deleteTaskIcon = document.createElement("img");
 		deleteTaskIcon.src = deleteIcon;
 		deleteTaskIcon.alt = "Delete Task Icon";
 		deleteTaskIcon.classList.add(...deleteTaskIconClasses);
+		// Task unique id on delete button
+		deleteTaskIcon.setAttribute("data-unique-id", task.uniqueId);
 
 		// Appending to parent
 		boxDiv1.append(checkBoxInput, taskNameSpan);
 
 		boxDiv2.append(dueDateInput, deleteTaskIcon);
 
-
-        taskContainer.append(boxDiv1, boxDiv2);
+		taskContainer.append(boxDiv1, boxDiv2);
 
 		// Appending to the main parent
-		document.querySelector(".tasks-grid-container").appendChild(taskContainer);
+		document
+			.querySelector(".tasks-grid-container")
+			.appendChild(taskContainer);
 		// const parentGridContainer = document.querySelector(".tasks-grid-container");
 		// parentGridContainer.appendChild(taskContainer);
 	}
