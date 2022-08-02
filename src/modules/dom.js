@@ -1,4 +1,6 @@
 import deleteIcon from "../assets/delete-svgrepo-com.svg";
+import { format } from 'date-fns'
+import { parseISO } from 'date-fns'
 const Dom = () => {
 	function openForm() {
 		const taskInputForm = document.querySelector(".task-input-form");
@@ -14,11 +16,11 @@ const Dom = () => {
 
 	function createTask(task) {
 		const taskContainerClasses = [
-			"bg-white",
-			"border-2",
+			"border-b-2",
 			"border-solid",
 			"border-black",
-			"h-max",
+			"h-[75px]",
+            "w-[92%]",
 			"flex",
 			"items-center",
 			"justify-between",
@@ -26,11 +28,15 @@ const Dom = () => {
 		];
 		const taskContainer = document.createElement("div");
 		taskContainer.classList.add(...taskContainerClasses);
+        // Task unique id
+        taskContainer.setAttribute("data-unique-id", task.uniqueId);
 
-		// Box div, to contain checkbox and name
+		// Box div1 to contain checkbox and name
+        const boxDiv1Classes = ["flex", "justify-between", "items-center"];
 		const boxDiv1 = document.createElement("div");
-		// Box div, to contain due date input and delete button
-		const boxDiv2Classes = ["flex", "justify-between", "w-[27%]"];
+        boxDiv1.classList.add(...boxDiv1Classes);
+		// Box div2
+		const boxDiv2Classes = ["flex", "justify-end", "w-[27%]"];
 		const boxDiv2 = document.createElement("div");
 		boxDiv2.classList.add(...boxDiv2Classes);
 
@@ -40,6 +46,7 @@ const Dom = () => {
 			"w-4",
 			"h-4",
 			"rounded-lg",
+            "mr-3"
 		];
 		const checkBoxInput = document.createElement("input");
 		checkBoxInput.classList.add(...checkBoxInputClasses);
@@ -47,27 +54,24 @@ const Dom = () => {
 		checkBoxInput.name = "task-status";
 		checkBoxInput.id = "task-status";
 
-		// Task unique id
-		taskContainer.setAttribute("data-unique-id", task.uniqueId);
+        // task and due date box
+        const taskDueDateBoxClasses = ["flex", "flex-col"];
+        const taskDueDateBox = document.createElement("div");
+        taskDueDateBox.classList.add(...taskDueDateBoxClasses);
+
 		// Task Name
 		const taskNameSpan = document.createElement("span");
 		taskNameSpan.classList.add("ml-2");
 		taskNameSpan.textContent = task.title;
 
 		// Task Due Date
-		const dueDateInputClasses = [
-			"border-2",
-			"border-gray-500",
-			"border-solid",
-			"p-1",
+		const dueDateSpanClasses = [
+			"task-due-date"
 		];
-		const dueDateInput = document.createElement("input");
-		dueDateInput.classList.add(...dueDateInputClasses);
-		dueDateInput.type = "date";
-		dueDateInput.name = "task-due-date";
-		dueDateInput.id = "task-due-date";
+		const dueDateSpan = document.createElement("span");
+		dueDateSpan.classList.add(...dueDateSpanClasses);
 
-		dueDateInput.value = task.dueDate;
+		dueDateSpan.textContent = format(parseISO(task.dueDate), "PP"); 
 
 		// Delte task Icon button
 		const deleteTaskIconClasses = [
@@ -84,9 +88,11 @@ const Dom = () => {
 		deleteTaskIcon.setAttribute("data-unique-id", task.uniqueId);
 
 		// Appending to parent
-		boxDiv1.append(checkBoxInput, taskNameSpan);
+        taskDueDateBox.append(taskNameSpan, dueDateSpan);
+		boxDiv1.append(checkBoxInput, taskDueDateBox);
 
-		boxDiv2.append(dueDateInput, deleteTaskIcon);
+
+		boxDiv2.append(deleteTaskIcon);
 
 		taskContainer.append(boxDiv1, boxDiv2);
 
@@ -98,7 +104,13 @@ const Dom = () => {
 		// parentGridContainer.appendChild(taskContainer);
 	}
 
-	return { openForm, closeForm, createTask };
+    const renderDateAndTime = () => {
+        const box = document.querySelector('.date-time-section');
+        box.textContent = format(new Date(), "PPPP");
+
+    }
+
+	return { openForm, closeForm, createTask, renderDateAndTime };
 };
 
 export { Dom };

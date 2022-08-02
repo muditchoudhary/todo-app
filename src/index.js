@@ -22,3 +22,6 @@ document
 document
 	.querySelector(".confirm-add-task-btn")
 	.addEventListener("click", taskObj.createNewTask);
+
+// Rendering current date and time
+domObject.renderDateAndTime()
