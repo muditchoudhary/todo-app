@@ -6,61 +6,143 @@
 		<title>To Do</title>
 	</head>
 	<body>
-        <div class="main-container xl::container xl:mx-auto flex-col h-screen bg-green-400 border-4 border-solid border-red-700">
-            <!--  Form for taking task inputs -->
-            <form action="#" class=" task-input-form hidden  grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
-                <div class=" col-span-2 text-5xl border-b-2 border-solid border-black flex justify-between max-h-14">
-                    <span>New Task</span>
-                    <button type="button" class=" close h-min">X</button>
-                </div>
-                <div class=" flex flex-col">
-                    <label for="title" class="text-3xl">Title:</label>
-                    <input type="text" name="title" id="title" required class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
-                </div>
-                <div class=" flex flex-col">
-                    <label for="due-date" class="text-3xl">Due Date:</label>
-                    <input type="date" name="due-date" id="due-date" required class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
-                </div>
-                <div class=" flex flex-col row-start-3 row-end-5">
-                    <label for="description" class="text-3xl">Description:</label>
-                    <textarea name="description" id="description" col="30" required class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5 h-full"></textarea>
-                </div>
-                <div class=" flex flex-col">
-                    <label for="priority" class="text-3xl">Priority:</label>
-                    <select name="priority" id="priority" required class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
-                        <option value="">Select Priority</option>
-                        <option value="P1">P1</option>
-                        <option value="P2">P2</option>
-                        <option value="P3">P3</option>
-                    </select>
-                </div>
-                <div class=" flex flex-col col-span-2 col-start-2 col-end-3">
-                    <label for="project" class="text-3xl">Project:</label>
-                    <input type="text" name="project" id="project" required class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
-                </div>
-                <div class=" col-span-2 flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black">
-                    <button type="button" class="cancel bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-min w-1/6">Cancel</button>
-                    <button type="button" class=" confirm-add-task-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-min w-1/6">Add task</button>
-                </div>
-            </form>
+		<div
+			class="main-container xl::container xl:mx-auto flex-col h-screen bg-green-400 border-4 border-solid border-red-700"
+		>
+			<!--  Form for taking task inputs -->
+			<form
+				action="#"
+				class="task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4"
+			>
+				<div
+					class="col-span-2 text-5xl border-b-2 border-solid border-black flex justify-between max-h-14"
+				>
+					<span>New Task</span>
+					<button type="button" class="close h-min">X</button>
+				</div>
+				<div class="flex flex-col">
+					<label for="title" class="text-3xl">Title:</label>
+					<input
+						type="text"
+						name="title"
+						id="title"
+						required
+						class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5"
+					/>
+				</div>
+				<div class="flex flex-col">
+					<label for="due-date" class="text-3xl">Due Date:</label>
+					<input
+						type="date"
+						name="due-date"
+						id="due-date"
+						required
+						class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5"
+					/>
+				</div>
+				<div class="flex flex-col row-start-3 row-end-5">
+					<label for="description" class="text-3xl"
+						>Description:</label
+					>
+					<textarea
+						name="description"
+						id="description"
+						col="30"
+						required
+						class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5 h-full"
+					></textarea>
+				</div>
+				<div class="flex flex-col">
+					<label for="priority" class="text-3xl">Priority:</label>
+					<select
+						name="priority"
+						id="priority"
+						required
+						class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5"
+					>
+						<option value="">Select Priority</option>
+						<option value="P1">P1</option>
+						<option value="P2">P2</option>
+						<option value="P3">P3</option>
+					</select>
+				</div>
+				<div class="flex flex-col col-span-2 col-start-2 col-end-3">
+					<label for="project" class="text-3xl">Project:</label>
+					<input
+						type="text"
+						name="project"
+						id="project"
+						required
+						class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5"
+					/>
+				</div>
+				<div
+					class="col-span-2 flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black"
+				>
+					<button
+						type="button"
+						class="cancel bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-min w-1/6"
+					>
+						Cancel
+					</button>
+					<button
+						type="button"
+						class="confirm-add-task-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-min w-1/6"
+					>
+						Add task
+					</button>
+				</div>
+			</form>
 
-            <div class="topbar h-[10%] bg-orange-300 flex justify-between p-3 flex-auto">
-              <div>
-                To Do
-              </div>
-              <button class="add-task">
-                Add task
-              </button>
-            </div>
-            <div class="h-[90%] bg-purple-400 flex flex-auto">
-              <div class="border-4 border-solid border-blue-600 bg-pink-400 w-1/4 flex-auto">sidebar</div>
-              <div class="border-4 bg-yellow-200 min-h-full w-3/4 border-solid border-black flex-auto">
-                <div class=" bg-orange-400 h-[10%]">Today wed 14 sept</div>
-                <div class=" tasks-grid-container bg-blue-400 h-[90%] grid grid-cols-1 auto-rows-fr overflow-auto">
-                </div>
-              </div>
-            </div>
-          </div>         
+			<div
+				class="topbar h-[10%] bg-orange-300 flex justify-between p-3 flex-auto"
+			>
+				<div>To Do</div>
+				<button class="add-task">Add task</button>
+			</div>
+			<div class="h-[90%] bg-purple-400 flex flex-auto">
+				<div
+					class="border-4 border-solid border-blue-600 bg-pink-400 w-1/4 flex-auto"
+				>
+					sidebar
+				</div>
+				<div
+					class="border-4 bg-yellow-200 min-h-full w-3/4 border-solid border-black flex-auto"
+				>
+					<div class="date-time-section bg-orange-400 h-[10%]"></div>
+					<div
+						class="tasks-grid-container bg-blue-400 h-[90%] grid grid-cols-1 auto-rows-fr justify-items-center overflow-auto"
+					>
+                    <!-- task item for test and styling -->
+						<!-- <div
+							class="border-b-2 border-solid border-black h-[75px] w-[92%] flex items-center justify-between p-3"
+							data-unique-id="13bda522-6116-48d9-a279-a02513e473df"
+						>
+							<div class=" flex justify-between items-center">
+								<input
+									class="appearance-none w-4 h-4 rounded-lg mr-3"
+									type="checkbox"
+									name="task-status"
+									id="task-status"
+								/>
+                                <div class=" flex flex-col">
+                                    <span class="ml-2">aa</span>
+                                    <span class=" task-due-date">19 Aug</span>
+                                </div>
+							</div>
+							<div class="flex justify-end w-[27%]">
+								<img
+									src="http://localhost:8080/ce196e10b37bc80499a4.svg"
+									alt="Delete Task Icon"
+									class="delete-btn h-9 w-9 cursor-pointer"
+									data-unique-id="13bda522-6116-48d9-a279-a02513e473df"
+								/>
+							</div>
+						</div> -->
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="main.js"></script>
 	</body>
 </html>
