@@ -1,4 +1,7 @@
-import deleteIcon from "../assets/delete-svgrepo-com.svg";
+import deleteIcon from "../assets/icons/delete-icon.svg";
+import priorityIcon from "../assets/icons/priority-icon.svg"
+import projectIcon from "../assets/icons/project-icon.svg"
+
 import { format } from 'date-fns'
 import { parseISO } from 'date-fns'
 const Dom = () => {
@@ -36,7 +39,7 @@ const Dom = () => {
 		const boxDiv1 = document.createElement("div");
         boxDiv1.classList.add(...boxDiv1Classes);
 		// Box div2
-		const boxDiv2Classes = ["flex", "justify-end", "w-[27%]"];
+		const boxDiv2Classes = ["flex", "justify-between", "w-[25%]"];
 		const boxDiv2 = document.createElement("div");
 		boxDiv2.classList.add(...boxDiv2Classes);
 
@@ -73,17 +76,28 @@ const Dom = () => {
 
 		dueDateSpan.textContent = format(parseISO(task.dueDate), "PP"); 
 
-		// Delte task Icon button
-		const deleteTaskIconClasses = [
-			"delete-btn",
-			"h-9",
-			"w-9",
+        // Priority Icon
+        const taskIconClasses = [
+			"h-auto",
+			"w-4",
 			"cursor-pointer",
-		];
+        ];
+        const priorityIconElm = document.createElement("img");
+        priorityIconElm.src = priorityIcon;
+        priorityIconElm.alt = "Priority Icon";
+        priorityIconElm.classList.add(...taskIconClasses);
+
+        // project task Icon
+        const projectIconElm = document.createElement("img");
+        projectIconElm.src = projectIcon;
+        projectIconElm.alt = "Project Icon";
+        projectIconElm.classList.add(...taskIconClasses);
+        
+		// Delte task Icon button
 		const deleteTaskIcon = document.createElement("img");
 		deleteTaskIcon.src = deleteIcon;
 		deleteTaskIcon.alt = "Delete Task Icon";
-		deleteTaskIcon.classList.add(...deleteTaskIconClasses);
+		deleteTaskIcon.classList.add(...taskIconClasses, "delete-btn", "w-5");
 		// Task unique id on delete button
 		deleteTaskIcon.setAttribute("data-unique-id", task.uniqueId);
 
@@ -92,7 +106,7 @@ const Dom = () => {
 		boxDiv1.append(checkBoxInput, taskDueDateBox);
 
 
-		boxDiv2.append(deleteTaskIcon);
+		boxDiv2.append(priorityIconElm, projectIconElm, deleteTaskIcon);
 
 		taskContainer.append(boxDiv1, boxDiv2);
 
