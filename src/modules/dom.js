@@ -15,7 +15,7 @@ const Dom = () => {
 		const taskInputForm = document.querySelector(".task-input-form");
 		taskInputForm.classList.remove("grid");
 		taskInputForm.classList.add("hidden");
-        clearFormFields();
+		clearFormFields();
 	};
 
 	const clearFormFields = () => {
@@ -33,6 +33,37 @@ const Dom = () => {
 		formFieldsIds.forEach((id) => {
 			document.querySelector(id).value = "";
 		});
+	};
+
+	const setRadioColorAsPerPriority = (task) => {
+		/**
+		 * Check for the priority of the task of the given task
+		 * set the color of radio button as per priority
+		 */
+		const radioBtn = document.body.querySelector(
+			`[data-unique-id="${task.uniqueId}"] .task-check-radio`
+		);
+		console.log(radioBtn);
+		const radioBtnBorderColorClasses = [
+			"border-gray-600",
+			"border-red-600",
+			"border-red-600",
+			"border-red-600",
+		];
+		radioBtn.classList.remove(...radioBtnBorderColorClasses);
+		switch (task.priority) {
+			case "P1":
+				radioBtn.classList.add("border-red-600");
+				break;
+			case "P2":
+				radioBtn.classList.add("border-yellow-600");
+				break;
+			case "P3":
+				radioBtn.classList.add("border-blue-600");
+				break;
+			default:
+				break;
+		}
 	};
 
 	const createTask = (task) => {
@@ -64,10 +95,15 @@ const Dom = () => {
 		// Checkbox Icon
 		const checkBoxInputClasses = [
 			"appearance-none",
-			"w-4",
-			"h-4",
-			"rounded-lg",
+			"w-5",
+			"h-5",
+			"rounded-xl",
+			"border-2",
+			"border-solid",
+			"border-gray-600",
 			"mr-3",
+			"task-check-radio",
+			"outline-none",
 		];
 		const checkBoxInput = document.createElement("input");
 		checkBoxInput.classList.add(...checkBoxInputClasses);
@@ -76,7 +112,7 @@ const Dom = () => {
 		checkBoxInput.id = "task-status";
 
 		// task and due date box
-		const taskDueDateBoxClasses = ["flex", "flex-col"];
+		const taskDueDateBoxClasses = ["flex", "flex-col", "items-center"];
 		const taskDueDateBox = document.createElement("div");
 		taskDueDateBox.classList.add(...taskDueDateBoxClasses);
 
@@ -134,7 +170,13 @@ const Dom = () => {
 		box.textContent = format(new Date(), "PPPP");
 	};
 
-	return { openForm, closeForm, createTask, renderDateAndTime };
+	return {
+		openForm,
+		closeForm,
+		createTask,
+		renderDateAndTime,
+		setRadioColorAsPerPriority,
+	};
 };
 
 export { Dom };

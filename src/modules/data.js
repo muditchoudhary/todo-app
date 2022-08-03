@@ -9,7 +9,7 @@ const Data = () => {
 		const priority = document.querySelector("#priority").value;
 		const project = document.querySelector("#project").value;
 
-		return { title, dueDate, description, priority, priority, project };
+		return { title, dueDate, description, priority, project };
 	};
 
 	const getLocalTasksData = (key) => {

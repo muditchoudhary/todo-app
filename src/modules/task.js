@@ -17,6 +17,7 @@ const Task = () => {
 			let tasksKeys = Object.keys(tasks);
 			tasksKeys.forEach((key) => {
 				domObj.createTask(tasks[key]);
+                domObj.setRadioColorAsPerPriority(tasks[key]);
 
 				const deleteTaskBtns = document.querySelectorAll(".delete-btn");
 				deleteTaskBtns.forEach((btn) => {
@@ -41,10 +42,10 @@ const Task = () => {
 		deleteTaskBtns.forEach((btn) => {
 			btn.addEventListener("click", deleteOldTask);
 		});
+        domObj.setRadioColorAsPerPriority(myTask);
 	};
 
 	const deleteOldTask = (e) => {
-		console.log("working");
 		const taskContainer = e.target;
 		const uniqueId = taskContainer.getAttribute("data-unique-id");
 		dataObj.deleteLocalTask(uniqueId);
