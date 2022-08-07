@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<div
-			class="main-container xl::container xl:mx-auto flex-col h-screen bg-green-400 border-4 border-solid border-red-700"
+			class="main-container flex-col h-screen"
 		>
 			<!--  Form for taking task inputs -->
 			<form
@@ -95,25 +95,25 @@
 			</form>
 
 			<div
-				class="topbar h-[10%] bg-orange-300 flex justify-between p-3 flex-auto"
+				class="topbar h-[10%] bg-gray-800 flex justify-between items-center p-3 flex-auto text-white"
 			>
-				<div>To Do</div>
-				<button class="add-task">Add task</button>
+				<div class=" text-2xl">To Do</div>
+				<button class="add-task text-2xl">Add task</button>
 			</div>
-			<div class="h-[90%] bg-purple-400 flex flex-auto">
+			<div class="h-[90%] flex flex-auto">
 				<div
-					class="border-4 border-solid border-blue-600 bg-pink-400 w-1/4 flex-auto"
+					class=" border-2 border-gray-600 w-1/4 flex-auto"
 				>
 					sidebar
 				</div>
 				<div
-					class="border-4 bg-yellow-200 min-h-full w-3/4 border-solid border-black flex-auto"
+					class="min-h-full w-3/4 flex-auto"
 				>
-					<div class="date-time-section bg-orange-400 h-[10%]"></div>
+					<div class="date-time-section text-gray-800 h-[10%]"></div>
 					<div
-						class="tasks-grid-container bg-blue-400 h-[90%] grid grid-cols-1 auto-rows-fr justify-items-center overflow-auto"
+						class="tasks-grid-container h-[90%] grid grid-cols-1 auto-rows-fr justify-items-center overflow-auto"
 					>
-                    <!-- task item for test and styling -->
+						<!-- task item for test and styling -->
 						<!-- <div
 							class="border-b-2 border-solid border-black h-[75px] w-[92%] flex items-center justify-between p-3"
 							data-unique-id="13bda522-6116-48d9-a279-a02513e473df"
