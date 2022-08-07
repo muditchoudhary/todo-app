@@ -1,13 +1,14 @@
 const Data = () => {
 	const getDatafromForm = () => {
 		/**
-		 * Fetch out all the data values from the form fields
+		 * This function fetch all the data from the form fields
+         * If any field is empty then return null
 		 */
-		const title = document.querySelector("#title").value;
-		const dueDate = document.querySelector("#due-date").value;
-		const description = document.querySelector("#description").value;
-		const priority = document.querySelector("#priority").value;
-		const project = document.querySelector("#project").value;
+		const title = document.querySelector("#title").value === "" ? null : document.querySelector("#title").value;
+		const dueDate = document.querySelector("#due-date").value === "" ? null : document.querySelector("#due-date").value;
+		const description = document.querySelector("#description").value === "" ? null : document.querySelector("#description").value;
+		const priority = document.querySelector("#priority").value === "" ? null : document.querySelector("#priority").value;
+		const project = document.querySelector("#project").value === "" ? null : document.querySelector("#project").value;
 
 		return { title, dueDate, description, priority, project };
 	};

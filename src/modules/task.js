@@ -1,6 +1,7 @@
 import { Data } from "./data";
 import { Dom } from "./dom";
 import { v4 as uuidv4 } from "uuid";
+import { format } from "date-fns";
 
 const Task = () => {
 	const isTaskPrsentLocally = () => {
@@ -17,7 +18,7 @@ const Task = () => {
 			let tasksKeys = Object.keys(tasks);
 			tasksKeys.forEach((key) => {
 				domObj.createTask(tasks[key]);
-                domObj.setRadioColorAsPerPriority(tasks[key]);
+				domObj.setRadioColorAsPerPriority(tasks[key]);
 
 				const deleteTaskBtns = document.querySelectorAll(".delete-btn");
 				deleteTaskBtns.forEach((btn) => {
@@ -30,20 +31,70 @@ const Task = () => {
 	const createNewTask = () => {
 		/**
 		 * Get values from the form fields
+		 * check if required filed has data otherwise raise an error
 		 * Store the task into the localStorage
 		 * Create a task element in the page
 		 */
 		const myTask = dataObj.getDatafromForm();
-		myTask.uniqueId = uuidv4();
-		dataObj.storeTasksLocally(myTask);
-		domObj.createTask(myTask);
-
-		const deleteTaskBtns = document.querySelectorAll(".delete-btn");
-		deleteTaskBtns.forEach((btn) => {
-			btn.addEventListener("click", deleteOldTask);
-		});
-        domObj.setRadioColorAsPerPriority(myTask);
+		;
+        if (checkRequiredFieldHasData(myTask) === true) {
+            checkOptionalFieldsHasData(myTask)
+            myTask.uniqueId = uuidv4();
+            dataObj.storeTasksLocally(myTask);
+            domObj.createTask(myTask);
+    
+            const deleteTaskBtns = document.querySelectorAll(".delete-btn");
+            deleteTaskBtns.forEach((btn) => {
+                btn.addEventListener("click", deleteOldTask);
+            });
+            domObj.setRadioColorAsPerPriority(myTask);
+        }
 	};
+
+	const checkRequiredFieldHasData = (taskData) => {
+		/**
+		 * This function first checks if required fields has data and should not be empty
+		 */
+        let successfull = true;
+		const requiredFields = ["title", "dueDate"];
+
+		for (let i = 0; i < requiredFields.length; i++) {
+			if (taskData[requiredFields[i]] === null) {
+				alert(`${requiredFields[i]} is a must field!!`);
+                successfull = false
+				location.reload();
+			}
+		}
+
+        return successfull;
+
+	};
+
+    const checkOptionalFieldsHasData = (myTask) => {
+        const optionalFields = [
+			"description",
+			"project",
+			"priority",
+		];
+
+        for (let i = 0; i < optionalFields.length; i++) {
+            if (myTask[optionalFields[i]] === null) {
+                switch (optionalFields[i]) {
+                    case "description":
+                        myTask[optionalFields[i]] = "None";
+                        break;
+                    case "project":
+                        myTask[optionalFields[i]] = "general";
+                        break;
+                    case "priority":
+                        myTask[optionalFields[i]] = "P3";
+                    default:
+                        break;
+                }
+            }
+        }
+
+    }
 
 	const deleteOldTask = (e) => {
 		const taskContainer = e.target;
