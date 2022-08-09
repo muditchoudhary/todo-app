@@ -12,6 +12,10 @@ const Dom = () => {
 	};
 
 	const closeForm = () => {
+        /**
+         * It clear the fields of the form
+         * and then close it
+         */
 		const taskInputForm = document.querySelector(".task-input-form");
 		taskInputForm.classList.remove("grid");
 		taskInputForm.classList.add("hidden");

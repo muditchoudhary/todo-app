@@ -32,6 +32,7 @@ const Task = () => {
 		/**
 		 * Get values from the form fields
 		 * check if required filed has data otherwise raise an error
+         * check if optional field has data otherwise set the default data.
 		 * Store the task into the localStorage
 		 * Create a task element in the page
 		 */
@@ -48,12 +49,15 @@ const Task = () => {
                 btn.addEventListener("click", deleteOldTask);
             });
             domObj.setRadioColorAsPerPriority(myTask);
+
+            domObj.closeForm()
         }
 	};
 
 	const checkRequiredFieldHasData = (taskData) => {
 		/**
-		 * This function first checks if required fields has data and should not be empty
+		 * This function first checks if required fields has data and must not be empty
+         * If is has not it will give a message and reload the page.
 		 */
         let successfull = true;
 		const requiredFields = ["title", "dueDate"];
