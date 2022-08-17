@@ -12,16 +12,27 @@ const Dom = () => {
 		taskInputForm.classList.add("grid");
 	};
 
-	const closeForm = () => {
+	const closeForm = (whichFormToClose) => {
         /**
          * It clear the fields of the form
          * and then close it
          */
-		const taskInputForm = document.querySelector(".task-input-form");
-		taskInputForm.classList.remove("grid");
-		taskInputForm.classList.add("hidden");
+        let formToClose = '';
+        if (whichFormToClose === 'addTaskForm') {
+            formToClose = document.querySelector(".task-input-form");
+        } else if (whichFormToClose === 'updateTaskForm') {
+            formToClose = document.querySelector(".update-task-input-form ");
+        }
+		formToClose.classList.remove("grid");
+		formToClose.classList.add("hidden");
 		clearFormFields();
 	};
+
+    const openUpdateTaskForm = () => {
+        const updateTaskInputForm = document.querySelector(".update-task-input-form ");
+		updateTaskInputForm.classList.remove("hidden");
+		updateTaskInputForm.classList.add("grid");
+    }
 
 	const clearFormFields = () => {
 		/**
@@ -134,7 +145,7 @@ const Dom = () => {
 		dueDateSpan.textContent = format(parseISO(task.dueDate), "PP");
 
         // Edit Task Icon
-		const taskIconClasses = ["h-auto", "w-4", "cursor-pointer"];
+		const taskIconClasses = ["h-auto", "w-4", "cursor-pointer", "edit-task"];
         const editTaskIconElm = document.createElement("img");
         editTaskIconElm.src = editTaskIcon;
         editTaskIconElm.alt = "Edit Task Icon"
@@ -191,7 +202,8 @@ const Dom = () => {
 		createTask,
 		renderDateAndTime,
 		setRadioColorAsPerPriority,
-        addImagesSrcToElement
+        addImagesSrcToElement,
+        openUpdateTaskForm
 	};
 };
 
