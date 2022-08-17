@@ -1,6 +1,7 @@
 import deleteIcon from "../assets/icons/delete-icon.svg";
 import priorityIcon from "../assets/icons/priority-icon.svg";
 import projectIcon from "../assets/icons/project-icon.svg";
+import editTaskIcon from "../assets/icons/edit-icon.svg"
 
 import { format } from "date-fns";
 import { parseISO } from "date-fns";
@@ -132,8 +133,14 @@ const Dom = () => {
 
 		dueDateSpan.textContent = format(parseISO(task.dueDate), "PP");
 
-		// Priority Icon
+        // Edit Task Icon
 		const taskIconClasses = ["h-auto", "w-4", "cursor-pointer"];
+        const editTaskIconElm = document.createElement("img");
+        editTaskIconElm.src = editTaskIcon;
+        editTaskIconElm.alt = "Edit Task Icon"
+        editTaskIconElm.classList.add(...taskIconClasses);
+
+		// Priority Icon
 		const priorityIconElm = document.createElement("img");
 		priorityIconElm.src = priorityIcon;
 		priorityIconElm.alt = "Priority Icon";
@@ -157,7 +164,7 @@ const Dom = () => {
 		taskDueDateBox.append(taskNameSpan, dueDateSpan);
 		boxDiv1.append(checkBoxInput, taskDueDateBox);
 
-		boxDiv2.append(priorityIconElm, projectIconElm, deleteTaskIcon);
+		boxDiv2.append(editTaskIconElm , priorityIconElm, projectIconElm, deleteTaskIcon);
 
 		taskContainer.append(boxDiv1, boxDiv2);
 
@@ -174,12 +181,17 @@ const Dom = () => {
 		box.textContent = format(new Date(), "PPPP");
 	};
 
+    const addImagesSrcToElement = (element, img) => {
+        element.src = img;
+    }
+
 	return {
 		openForm,
 		closeForm,
 		createTask,
 		renderDateAndTime,
 		setRadioColorAsPerPriority,
+        addImagesSrcToElement
 	};
 };
 
