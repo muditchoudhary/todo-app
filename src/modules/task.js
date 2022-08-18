@@ -28,6 +28,7 @@ const Task = () => {
 				const editTaskBtns = document.querySelectorAll(".edit-task");
 				editTaskBtns.forEach((btn) => {
 					btn.addEventListener("click", domObj.openUpdateTaskForm);
+                    btn.addEventListener("click", domObj.fillFormFields);
 				});
 			});
 		});
@@ -57,8 +58,9 @@ const Task = () => {
 			const editTaskBtns = document.querySelectorAll(".edit-task");
 			editTaskBtns.forEach((btn) => {
 				btn.addEventListener("click", domObj.openUpdateTaskForm);
+				btn.addEventListener("click", domObj.fillFormFields);
 			});
-			domObj.closeForm();
+			domObj.closeForm("addTaskForm");
 		}
 	};
 

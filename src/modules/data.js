@@ -2,13 +2,28 @@ const Data = () => {
 	const getDatafromForm = () => {
 		/**
 		 * This function fetch all the data from the form fields
-         * If any field is empty then return null
+		 * If any field is empty then return null
 		 */
-		const title = document.querySelector("#title").value === "" ? null : document.querySelector("#title").value;
-		const dueDate = document.querySelector("#due-date").value === "" ? null : document.querySelector("#due-date").value;
-		const description = document.querySelector("#description").value === "" ? null : document.querySelector("#description").value;
-		const priority = document.querySelector("#priority").value === "" ? null : document.querySelector("#priority").value;
-		const project = document.querySelector("#project").value === "" ? null : document.querySelector("#project").value;
+		const title =
+			document.querySelector("#title").value === ""
+				? null
+				: document.querySelector("#title").value;
+		const dueDate =
+			document.querySelector("#due-date").value === ""
+				? null
+				: document.querySelector("#due-date").value;
+		const description =
+			document.querySelector("#description").value === ""
+				? null
+				: document.querySelector("#description").value;
+		const priority =
+			document.querySelector("#priority").value === ""
+				? null
+				: document.querySelector("#priority").value;
+		const project =
+			document.querySelector("#project").value === ""
+				? null
+				: document.querySelector("#project").value;
 
 		return { title, dueDate, description, priority, project };
 	};
@@ -89,12 +104,36 @@ const Data = () => {
 		location.reload();
 	};
 
+	const getParticularTaskDataById = (id) => {
+		for (let projectKey in localStorage) {
+			let projectTasksData = localStorage[projectKey];
+			projectTasksData = convertStringToObject(projectTasksData);
+			for (let task in projectTasksData) {
+				let taskData = projectTasksData[task];
+				if (taskData.uniqueId === id) {
+					return taskData;
+				}
+			}
+		}
+
+		return null;
+	};
+
+	const setParticularFormFieldData = (field, dataValue) => {
+		dataValue === "None"
+		    ? (document.querySelector(`#${field}`).value = "")
+		    : (document.querySelector(`#${field}`).value = dataValue);
+		// console.log(document.querySelector(`#${field}`));
+	};
+
 	return {
 		getDatafromForm,
 		storeTasksLocally,
 		convertStringToObject,
 		convertObjectToString,
 		deleteLocalTask,
+		getParticularTaskDataById,
+		setParticularFormFieldData,
 	};
 };
 

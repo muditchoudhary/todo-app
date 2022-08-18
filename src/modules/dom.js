@@ -1,10 +1,11 @@
 import deleteIcon from "../assets/icons/delete-icon.svg";
 import priorityIcon from "../assets/icons/priority-icon.svg";
 import projectIcon from "../assets/icons/project-icon.svg";
-import editTaskIcon from "../assets/icons/edit-icon.svg"
-
+import editTaskIcon from "../assets/icons/edit-icon.svg";
 import { format } from "date-fns";
 import { parseISO } from "date-fns";
+import { Data } from "./data";
+import { data } from "autoprefixer";
 const Dom = () => {
 	const openForm = () => {
 		const taskInputForm = document.querySelector(".task-input-form");
@@ -13,26 +14,41 @@ const Dom = () => {
 	};
 
 	const closeForm = (whichFormToClose) => {
-        /**
-         * It clear the fields of the form
-         * and then close it
-         */
-        let formToClose = '';
-        if (whichFormToClose === 'addTaskForm') {
-            formToClose = document.querySelector(".task-input-form");
-        } else if (whichFormToClose === 'updateTaskForm') {
-            formToClose = document.querySelector(".update-task-input-form ");
-        }
+		/**
+		 * It clear the fields of the form
+		 * and then close it
+		 */
+		let formToClose = "";
+		if (whichFormToClose === "addTaskForm") {
+			formToClose = document.querySelector(".task-input-form");
+		} else if (whichFormToClose === "updateTaskForm") {
+			formToClose = document.querySelector(".update-task-input-form ");
+		}
 		formToClose.classList.remove("grid");
 		formToClose.classList.add("hidden");
 		clearFormFields();
 	};
 
-    const openUpdateTaskForm = () => {
-        const updateTaskInputForm = document.querySelector(".update-task-input-form ");
+	const openUpdateTaskForm = (e) => {
+		const updateTaskInputForm = document.querySelector(
+			".update-task-input-form "
+		);
 		updateTaskInputForm.classList.remove("hidden");
 		updateTaskInputForm.classList.add("grid");
-    }
+	};
+
+	const fillFormFields = (e) => {
+		const uniqueId = e.target.getAttribute("data-unique-id");
+		const taskContainer = document.body.querySelector(`[data-unique-id="${uniqueId}"]`);
+        const taskData = dataObj.getParticularTaskDataById(uniqueId);
+
+        dataObj.setParticularFormFieldData("update-task-title", taskData.title)
+        dataObj.setParticularFormFieldData("update-task-due-date", taskData.dueDate )
+        dataObj.setParticularFormFieldData("update-task-description", taskData.description )
+        dataObj.setParticularFormFieldData("update-task-priority", taskData.priority )
+        dataObj.setParticularFormFieldData("update-task-project", taskData.project)
+        
+	};
 
 	const clearFormFields = () => {
 		/**
@@ -144,12 +160,18 @@ const Dom = () => {
 
 		dueDateSpan.textContent = format(parseISO(task.dueDate), "PP");
 
-        // Edit Task Icon
-		const taskIconClasses = ["h-auto", "w-4", "cursor-pointer", "edit-task"];
-        const editTaskIconElm = document.createElement("img");
-        editTaskIconElm.src = editTaskIcon;
-        editTaskIconElm.alt = "Edit Task Icon"
-        editTaskIconElm.classList.add(...taskIconClasses);
+		// Edit Task Icon
+		const taskIconClasses = [
+			"h-auto",
+			"w-4",
+			"cursor-pointer",
+			"edit-task",
+		];
+		const editTaskIconElm = document.createElement("img");
+		editTaskIconElm.src = editTaskIcon;
+		editTaskIconElm.alt = "Edit Task Icon";
+		editTaskIconElm.classList.add(...taskIconClasses);
+		editTaskIconElm.setAttribute("data-unique-id", task.uniqueId);
 
 		// Priority Icon
 		const priorityIconElm = document.createElement("img");
@@ -175,7 +197,12 @@ const Dom = () => {
 		taskDueDateBox.append(taskNameSpan, dueDateSpan);
 		boxDiv1.append(checkBoxInput, taskDueDateBox);
 
-		boxDiv2.append(editTaskIconElm , priorityIconElm, projectIconElm, deleteTaskIcon);
+		boxDiv2.append(
+			editTaskIconElm,
+			priorityIconElm,
+			projectIconElm,
+			deleteTaskIcon
+		);
 
 		taskContainer.append(boxDiv1, boxDiv2);
 
@@ -192,9 +219,9 @@ const Dom = () => {
 		box.textContent = format(new Date(), "PPPP");
 	};
 
-    const addImagesSrcToElement = (element, img) => {
-        element.src = img;
-    }
+	const addImagesSrcToElement = (element, img) => {
+		element.src = img;
+	};
 
 	return {
 		openForm,
@@ -202,9 +229,12 @@ const Dom = () => {
 		createTask,
 		renderDateAndTime,
 		setRadioColorAsPerPriority,
-        addImagesSrcToElement,
-        openUpdateTaskForm
+		addImagesSrcToElement,
+		openUpdateTaskForm,
+		fillFormFields,
 	};
 };
 
+// Data.js objects
+let dataObj = Data();
 export { Dom };
