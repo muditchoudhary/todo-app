@@ -39,7 +39,7 @@ const Dom = () => {
 
 	const fillFormFields = (e) => {
 		const uniqueId = e.target.getAttribute("data-unique-id");
-		const taskContainer = document.body.querySelector(`[data-unique-id="${uniqueId}"]`);
+        dataObj.setCurrentTaskUniqueId(uniqueId);
         const taskData = dataObj.getParticularTaskDataById(uniqueId);
 
         dataObj.setParticularFormFieldData("update-task-title", taskData.title)
@@ -47,7 +47,7 @@ const Dom = () => {
         dataObj.setParticularFormFieldData("update-task-description", taskData.description )
         dataObj.setParticularFormFieldData("update-task-priority", taskData.priority )
         dataObj.setParticularFormFieldData("update-task-project", taskData.project)
-        
+
 	};
 
 	const clearFormFields = () => {

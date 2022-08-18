@@ -34,6 +34,10 @@ document
 document
 	.querySelector(".confirm-add-task-btn")
 	.addEventListener("click", taskObj.createNewTask);
+document
+	.querySelector(".update-task-btn")
+	.addEventListener("click", taskObj.updateTask);
+
 // Adding Icons Images to elements
 domObject.addImagesSrcToElement(
 	document.querySelector(".inbox-icon"),

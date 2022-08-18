@@ -27,8 +27,8 @@ const Task = () => {
 
 				const editTaskBtns = document.querySelectorAll(".edit-task");
 				editTaskBtns.forEach((btn) => {
-					btn.addEventListener("click", domObj.openUpdateTaskForm);
                     btn.addEventListener("click", domObj.fillFormFields);
+					btn.addEventListener("click", domObj.openUpdateTaskForm);
 				});
 			});
 		});
@@ -57,8 +57,8 @@ const Task = () => {
 
 			const editTaskBtns = document.querySelectorAll(".edit-task");
 			editTaskBtns.forEach((btn) => {
+                btn.addEventListener("click", domObj.fillFormFields);
 				btn.addEventListener("click", domObj.openUpdateTaskForm);
-				btn.addEventListener("click", domObj.fillFormFields);
 			});
 			domObj.closeForm("addTaskForm");
 		}
@@ -110,11 +110,26 @@ const Task = () => {
 		dataObj.deleteLocalTask(uniqueId);
 	};
 
+    const updateTask = () => {
+        const uniqueId = dataObj.getCurrentTaskUniqueId();
+
+        const title = dataObj.getParticularFormFieldData("update-task-title");
+        const dueDate = dataObj.getParticularFormFieldData("update-task-due-date");
+        const desc = dataObj.getParticularFormFieldData("update-task-description");
+        const priority = dataObj.getParticularFormFieldData("update-task-priority");
+        const project = dataObj.getParticularFormFieldData("update-task-project");
+
+        dataObj.setParticularTaskDataById(uniqueId, title, dueDate, desc, priority, project);
+
+        location.reload()
+    }
+
 	return {
 		createNewTask,
 		isTaskPrsentLocally,
 		renderLocalTask,
 		deleteOldTask,
+        updateTask
 	};
 };
 
