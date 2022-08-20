@@ -120,7 +120,7 @@ const Dom = () => {
 		const boxDiv1 = document.createElement("div");
 		boxDiv1.classList.add(...boxDiv1Classes);
 		// Box div2
-		const boxDiv2Classes = ["flex", "justify-between", "w-[25%]"];
+		const boxDiv2Classes = ["flex", "justify-end", "w-[25%]"];
 		const boxDiv2 = document.createElement("div");
 		boxDiv2.classList.add(...boxDiv2Classes);
 
@@ -166,24 +166,13 @@ const Dom = () => {
 			"w-4",
 			"cursor-pointer",
 			"edit-task",
+            "mr-[24px]"
 		];
 		const editTaskIconElm = document.createElement("img");
 		editTaskIconElm.src = editTaskIcon;
 		editTaskIconElm.alt = "Edit Task Icon";
 		editTaskIconElm.classList.add(...taskIconClasses);
 		editTaskIconElm.setAttribute("data-unique-id", task.uniqueId);
-
-		// Priority Icon
-		const priorityIconElm = document.createElement("img");
-		priorityIconElm.src = priorityIcon;
-		priorityIconElm.alt = "Priority Icon";
-		priorityIconElm.classList.add(...taskIconClasses);
-
-		// project task Icon
-		const projectIconElm = document.createElement("img");
-		projectIconElm.src = projectIcon;
-		projectIconElm.alt = "Project Icon";
-		projectIconElm.classList.add(...taskIconClasses);
 
 		// Delte task Icon button
 		const deleteTaskIcon = document.createElement("img");
@@ -199,8 +188,6 @@ const Dom = () => {
 
 		boxDiv2.append(
 			editTaskIconElm,
-			priorityIconElm,
-			projectIconElm,
 			deleteTaskIcon
 		);
 
