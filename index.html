@@ -11,7 +11,7 @@
     <div class="main-container flex-col h-screen">
         <!--  Form for taking task inputs and adding a new task -->
         <form action="#"
-        class="task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
+            class="task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
             <div class="col-span-2 text-5xl border-b-2 border-solid border-black flex justify-between max-h-14">
                 <span>New Task</span>
                 <button type="button" class="close h-min">X</button>
@@ -59,7 +59,7 @@
         </form>
         <!--  Form for updating task -->
         <form action="#"
-        class="update-task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
+            class="update-task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
             <div class="col-span-2 text-5xl border-b-2 border-solid border-black flex justify-between max-h-14">
                 <span>Update Task</span>
                 <button type="button" class="update-form-close h-min">X</button>
@@ -105,6 +105,29 @@
                 </button>
             </div>
         </form>
+        <!-- Form for Add a new project -->
+        <form action="#" class="new-project-input-form hidden grid-cols-1 grid-rows-3 absolute w-2/5
+         left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
+            <div class="text-3xl border-b-2 border-solid border-black flex justify-between items-center max-h-14">
+                <span>New Project</span>
+                <button type="button" class="new-task-form-close h-min">X</button>
+            </div>
+            <div class="flex justify-between items-center">
+                <label for="new-project" class="text-2xl">Name:</label>
+                <input type="text" name="new-project" id="new-project" required
+                    class="required:border-red-500 valid:border-green-500 w-4/5 text-2xl p-[2px] px-1" />
+            </div>
+            <div class="flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black">
+                <button type="button"
+                    class="new-project-form-cancel bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-min w-max">
+                    Cancel
+                </button>
+                <button type="button"
+                    class="confirm-add-project-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-min w-max">
+                    Add Project
+                </button>
+            </div>
+        </form>
 
         <div class="topbar h-[10%] bg-gray-800 flex justify-between items-center p-3 flex-auto text-white">
             <div class=" text-2xl">To Do</div>
@@ -125,11 +148,11 @@
                 <div>
                     <div class="flex justify-between">
                         <div class=" flex text-xl gap-3">
-                            <img alt="right arrow icon" class="h-[16px] w-[16px] projects-icon">
+                            <img alt="right arrow icon" class="h-[16px] w-[16px] projects-icon cursor-pointer">
                             <span>Projects</span>
                         </div>
                         <div class=" cursor-pointer">
-                            <img alt="plus icon" class="h-[16px] w-[16px] add-icon">
+                            <img alt="plus icon" class="h-[16px] w-[16px] add-icon add-new-project">
                         </div>
 
                     </div>
