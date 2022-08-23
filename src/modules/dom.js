@@ -10,6 +10,7 @@ const Dom = () => {
     const openForm = () => {
         const taskInputForm = document.querySelector(".task-input-form");
         taskInputForm.classList.remove("hidden");
+        updateFormProjectsOptions();
         taskInputForm.classList.add("grid");
     };
 
@@ -214,11 +215,37 @@ const Dom = () => {
         document.querySelector('.new-project-input-form').classList.remove("hidden");
         document.querySelector('.new-project-input-form').classList.add("grid");
     }
+
     const closeAddNewProjectForm = () => {
         document.querySelector('.new-project-input-form').classList.remove("grid");
         document.querySelector('.new-project-input-form').classList.add("hidden");
     }
 
+    const updateFormProjectsOptions = () => {
+        const projectSelectTag = document.querySelector("#project");
+        const projects = Object.keys(localStorage);
+        projects.forEach(project => {
+            if (isProjectOptionAlreadyPresent(project)) {
+                return;
+            } else {
+                let optionTag = document.createElement("option");
+                optionTag.value = project.toLocaleLowerCase();
+                optionTag.textContent = project.charAt(0).toUpperCase() + project.slice(1);
+                optionTag.classList.add("project-options");
+                projectSelectTag.append(optionTag);
+            }
+        });
+    }
+
+    const isProjectOptionAlreadyPresent = (project) => {
+        const allProjectOptionsValue = document.querySelectorAll('.project-options');
+        for (let i = 0; i < allProjectOptionsValue.length; i++) {
+            if (allProjectOptionsValue[i].value === project) {
+                return true;
+            }
+        }
+        return false;
+    }
     return {
         openForm,
         closeForm,
@@ -229,7 +256,8 @@ const Dom = () => {
         openUpdateTaskForm,
         fillFormFields,
         openAddNewProjectForm,
-        closeAddNewProjectForm
+        closeAddNewProjectForm,
+        updateFormProjectsOptions
     };
 };
 

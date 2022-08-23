@@ -61,28 +61,12 @@ const Data = () => {
     };
 
     const storeTasksLocally = (task) => {
-        /**
-         * The work of this function is to first check if the same project
-         * as new task project already present in the localstorage
-         * If present then store new task data on itself only by first
-         * getting the that project data first
-         * If it is not than create that new project and store data there.
-         */
-
-        if (checkLocalStorageHasSameProjectAsNewTask(task.project)) {
             let tasksData = getLocalTasksData(task.project);
             tasksData = convertStringToObject(tasksData);
             let index = Object.keys(tasksData).length;
             tasksData[index + 1] = task;
             let tasksDataStringify = convertObjectToString(tasksData);
             setLocalTaskData(task.project, tasksDataStringify);
-        } else {
-            let taskData = {};
-            taskData[1] = task;
-            let tasksDataStringify = convertObjectToString(taskData);
-            setLocalTaskData(task.project, tasksDataStringify);
-        }
-
     };
 
     const deleteLocalTask = (id) => {

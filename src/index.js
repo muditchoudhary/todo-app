@@ -67,6 +67,3 @@ domObject.addImagesSrcToElement(document.querySelector(".add-icon"), addIcon);
 
 // Rendering current date and time
 domObject.renderDateAndTime();
-
-// Initial setup of localStorage
-localStorage.setItem("general", "{}");

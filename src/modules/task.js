@@ -134,8 +134,8 @@ const Task = () => {
                 alert("Project with name: " + project + " already present.");
                 location.reload();
             } else {
-                localStorage.setItem(project, "{}");
-                alert("Project has been successfuly creted!")
+                localStorage.setItem(project.toLowerCase(), "{}");
+                alert("Project has been successfuly created!")
                 domObj.closeAddNewProjectForm();
             }
         }
