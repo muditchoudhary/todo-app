@@ -37,6 +37,18 @@ document
 document
 	.querySelector(".update-task-btn")
 	.addEventListener("click", taskObj.updateTask);
+document
+	.querySelector(".add-new-project")
+	.addEventListener("click", domObject.openAddNewProjectForm);
+document
+	.querySelector(".new-project-form-close")
+	.addEventListener("click", domObject.closeAddNewProjectForm);
+document
+	.querySelector(".new-project-form-cancel")
+	.addEventListener("click", domObject.closeAddNewProjectForm);
+document
+	.querySelector(".confirm-add-project-btn")
+	.addEventListener("click", taskObj.createNewProject);
 
 // Adding Icons Images to elements
 domObject.addImagesSrcToElement(
@@ -57,4 +69,4 @@ domObject.addImagesSrcToElement(document.querySelector(".add-icon"), addIcon);
 domObject.renderDateAndTime();
 
 // Initial setup of localStorage
-localStorage.setItem("general", "{}")
+localStorage.setItem("general", "{}");
