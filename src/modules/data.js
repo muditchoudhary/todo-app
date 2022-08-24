@@ -198,6 +198,12 @@ const Data = () => {
         return false;
     };
 
+    const deleteProject = (e) => {
+        const myProjectName = e.target.alt;
+        localStorage.removeItem(myProjectName);
+        alert("The project '" + myProjectName + "' has been successfully deleted!!");
+        location.reload();
+    }
     return {
         getDatafromForm,
         storeTasksLocally,
@@ -211,7 +217,8 @@ const Data = () => {
         getCurrentTaskUniqueId,
         setParticularTaskDataById,
         checkLocalStorageHasSameProjectAsNewProject,
-        getDataFromNewProjectForm
+        getDataFromNewProjectForm,
+        deleteProject
     };
 };
 

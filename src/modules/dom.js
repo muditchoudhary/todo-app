@@ -275,7 +275,10 @@ const Dom = () => {
                 projectName.classList.add("text-[22px]");
                 const deleteImg = document.createElement('img');
                 deleteImg.src = deleteIcon;
-                deleteImg.classList.add("w-[14px]", "h-[auto]");
+                // Adding project name on delete icon alt, so that it can be use when deleting the project
+                deleteImg.alt = totalProjects[i];
+                deleteImg.classList.add("w-[14px]", "h-[auto]", "cursor-pointer");
+                deleteImg.addEventListener('click', dataObj.deleteProject);
     
                 div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]");
                 div.append(projectName, deleteImg);
