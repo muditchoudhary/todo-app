@@ -268,18 +268,20 @@ const Dom = () => {
         const projectListSectionDiv = document.querySelector(".projects-section");
         const totalProjects = Object.keys(localStorage);
         for (let i = 0; i < totalProjects.length; i++) {
-            const div = document.createElement('div');
-            const projectName = document.createElement('span');
-            projectName.textContent = totalProjects[i].charAt(0).toLocaleUpperCase()  + totalProjects[i].slice(1);
-            projectName.classList.add("text-[22px]");
-            const deleteImg = document.createElement('img');
-            deleteImg.src = deleteIcon;
-            deleteImg.classList.add("w-[14px]", "h-[auto]");
-
-            div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]");
-            div.append(projectName, deleteImg);
-
-            projectListSectionDiv.appendChild(div);
+            if (totalProjects[i] !== "general") {
+                const div = document.createElement('div');
+                const projectName = document.createElement('span');
+                projectName.textContent = totalProjects[i].charAt(0).toLocaleUpperCase()  + totalProjects[i].slice(1);
+                projectName.classList.add("text-[22px]");
+                const deleteImg = document.createElement('img');
+                deleteImg.src = deleteIcon;
+                deleteImg.classList.add("w-[14px]", "h-[auto]");
+    
+                div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]");
+                div.append(projectName, deleteImg);
+    
+                projectListSectionDiv.appendChild(div);
+            }
         }
     }
     return {

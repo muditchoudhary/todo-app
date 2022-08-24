@@ -137,6 +137,7 @@ const Task = () => {
                 localStorage.setItem(project.toLowerCase(), "{}");
                 alert("Project has been successfuly created!")
                 domObj.closeAddNewProjectForm();
+                location.reload();
             }
         }
     }
