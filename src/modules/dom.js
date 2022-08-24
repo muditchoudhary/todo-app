@@ -10,7 +10,7 @@ const Dom = () => {
     const openForm = () => {
         const taskInputForm = document.querySelector(".task-input-form");
         taskInputForm.classList.remove("hidden");
-        updateFormProjectsOptions();
+        updateFormProjectsOptions("#project");
         taskInputForm.classList.add("grid");
     };
 
@@ -221,11 +221,11 @@ const Dom = () => {
         document.querySelector('.new-project-input-form').classList.add("hidden");
     }
 
-    const updateFormProjectsOptions = () => {
-        const projectSelectTag = document.querySelector("#project");
+    const updateFormProjectsOptions = (selectTag) => {
+        const projectSelectTag = document.querySelector(selectTag);
         const projects = Object.keys(localStorage);
         projects.forEach(project => {
-            if (isProjectOptionAlreadyPresent(project)) {
+            if (isProjectOptionAlreadyPresent(selectTag ,project)) {
                 return;
             } else {
                 let optionTag = document.createElement("option");
@@ -237,8 +237,8 @@ const Dom = () => {
         });
     }
 
-    const isProjectOptionAlreadyPresent = (project) => {
-        const allProjectOptionsValue = document.querySelectorAll('.project-options');
+    const isProjectOptionAlreadyPresent = (parentSelectTag ,project) => {
+        const allProjectOptionsValue = document.querySelectorAll(`${parentSelectTag} .project-options`);
         for (let i = 0; i < allProjectOptionsValue.length; i++) {
             if (allProjectOptionsValue[i].value === project) {
                 return true;
@@ -263,4 +263,5 @@ const Dom = () => {
 
 // Data.js objects
 let dataObj = Data();
-export { Dom };
+const domObj = Dom();
+export { Dom, domObj };

@@ -1,3 +1,4 @@
+import { domObj } from "./dom";
 let currentTaskUniqueId = "";
 const Data = () => {
     const getDatafromForm = () => {
@@ -132,15 +133,30 @@ const Data = () => {
             for (let task in projectTasksData) {
                 let taskData = projectTasksData[task];
                 if (taskData.uniqueId === id) {
-                    taskData.title = title;
-                    taskData.dueDate = dueDate;
-                    taskData.description = desc;
-                    taskData.priority = priority;
-                    taskData.project = project;
-                    projectTasksData = convertObjectToString(projectTasksData);
-                    localStorage.setItem(projectKey, projectTasksData);
-                    isDataStored = true;
-                    break;
+                    if (project !== taskData.project) {
+                        deleteLocalTask(id);
+                        let myTask = {
+                            description: desc,
+                            dueDate: dueDate,
+                            priority: priority,
+                            project: project,
+                            title: title,
+                            uniqueId: id
+                        };
+                        storeTasksLocally(myTask);
+                        isDataStored = true;
+                        break;
+                    } else {
+                        taskData.title = title;
+                        taskData.dueDate = dueDate;
+                        taskData.description = desc;
+                        taskData.priority = priority;
+                        taskData.project = project;
+                        projectTasksData = convertObjectToString(projectTasksData);
+                        localStorage.setItem(projectKey, projectTasksData);
+                        isDataStored = true;
+                        break;
+                    }
                 }
             }
             if (isDataStored) break;
@@ -148,6 +164,9 @@ const Data = () => {
     };
 
     const setParticularFormFieldData = (field, dataValue) => {
+        if (field === "update-task-project") {
+            domObj.updateFormProjectsOptions("#update-task-project");
+        }
         dataValue === "None"
             ? (document.querySelector(`#${field}`).value = "")
             : (document.querySelector(`#${field}`).value = dataValue);
