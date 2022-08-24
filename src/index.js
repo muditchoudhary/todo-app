@@ -5,6 +5,7 @@ import { Task } from "./modules/task";
 import inboxIcon from "./assets/icons/inbox-icon.svg";
 import todayIcon from "./assets/icons/calender-icon.svg";
 import rightArrowIcon from "./assets/icons/right-arrow-icon.svg";
+import downArrowIcon from "./assets/icons/down-arrow-icon.svg";
 import addIcon from "./assets/icons/add-icon.svg";
 
 // Checking if there are task stored locally
@@ -49,6 +50,12 @@ document
 document
 	.querySelector(".confirm-add-project-btn")
 	.addEventListener("click", taskObj.createNewProject);
+document
+	.querySelector(".right-arrow-icon")
+	.addEventListener("click", domObject.unHideProjectSection);
+document
+	.querySelector(".down-arrow-icon")
+	.addEventListener("click", domObject.hideProjectSection);
 
 // Adding Icons Images to elements
 domObject.addImagesSrcToElement(
@@ -60,10 +67,17 @@ domObject.addImagesSrcToElement(
 	todayIcon
 );
 domObject.addImagesSrcToElement(
-	document.querySelector(".projects-icon"),
+	document.querySelector(".right-arrow-icon"),
 	rightArrowIcon
 );
+domObject.addImagesSrcToElement(
+	document.querySelector(".down-arrow-icon"),
+	downArrowIcon
+);
 domObject.addImagesSrcToElement(document.querySelector(".add-icon"), addIcon);
+
+// Render the project list in the sidebar
+domObject.createProjectList();
 
 // Rendering current date and time
 domObject.renderDateAndTime();
