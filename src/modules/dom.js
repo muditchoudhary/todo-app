@@ -1,6 +1,4 @@
 import deleteIcon from "../assets/icons/delete-icon.svg";
-import priorityIcon from "../assets/icons/priority-icon.svg";
-import projectIcon from "../assets/icons/project-icon.svg";
 import editTaskIcon from "../assets/icons/edit-icon.svg";
 import { format } from "date-fns";
 import { parseISO } from "date-fns";
@@ -137,12 +135,14 @@ const Dom = () => {
             "mr-3",
             "task-check-radio",
             "outline-none",
+            "task-checkbox"
         ];
         const checkBoxInput = document.createElement("input");
         checkBoxInput.classList.add(...checkBoxInputClasses);
         checkBoxInput.type = "checkbox";
         checkBoxInput.name = "task-status";
         checkBoxInput.id = "task-status";
+        checkBoxInput.setAttribute("data-unique-id", task.uniqueId);
 
         // task and due date box
         const taskDueDateBoxClasses = ["flex", "flex-col", "items-center"];
@@ -287,6 +287,7 @@ const Dom = () => {
             }
         }
     }
+
     return {
         openForm,
         closeForm,
@@ -301,11 +302,13 @@ const Dom = () => {
         updateFormProjectsOptions,
         unHideProjectSection,
         hideProjectSection,
-        createProjectList
+        createProjectList,
     };
 };
+
 
 // Data.js objects
 let dataObj = Data();
 const domObj = Dom();
 export { Dom, domObj };
+

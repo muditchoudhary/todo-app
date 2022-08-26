@@ -20,6 +20,11 @@ const Task = () => {
                 domObj.createTask(tasks[key]);
                 domObj.setRadioColorAsPerPriority(tasks[key]);
 
+                const checkTaskBtns = document.querySelectorAll(".task-checkbox");
+                checkTaskBtns.forEach((checkBtn) => {
+                    checkBtn.addEventListener("click", isTaskCompleted);
+                });
+
                 const deleteTaskBtns = document.querySelectorAll(".delete-btn");
                 deleteTaskBtns.forEach((btn) => {
                     btn.addEventListener("click", deleteOldTask);
@@ -49,6 +54,10 @@ const Task = () => {
             dataObj.storeTasksLocally(myTask);
             domObj.createTask(myTask);
 
+            const checkTaskBtns = document.querySelectorAll(".task-checkbox");
+            checkTaskBtns.forEach((checkBtn) => {
+                checkBtn.addEventListener("click", isTaskCompleted);
+            });
             const deleteTaskBtns = document.querySelectorAll(".delete-btn");
             deleteTaskBtns.forEach((btn) => {
                 btn.addEventListener("click", deleteOldTask);
@@ -114,15 +123,30 @@ const Task = () => {
         const uniqueId = dataObj.getCurrentTaskUniqueId();
 
         const title = dataObj.getParticularFormFieldData("update-task-title");
-        const dueDate = dataObj.getParticularFormFieldData("update-task-due-date");
-        const desc = dataObj.getParticularFormFieldData("update-task-description");
-        const priority = dataObj.getParticularFormFieldData("update-task-priority");
-        const project = dataObj.getParticularFormFieldData("update-task-project");
+        const dueDate = dataObj.getParticularFormFieldData(
+            "update-task-due-date"
+        );
+        const desc = dataObj.getParticularFormFieldData(
+            "update-task-description"
+        );
+        const priority = dataObj.getParticularFormFieldData(
+            "update-task-priority"
+        );
+        const project = dataObj.getParticularFormFieldData(
+            "update-task-project"
+        );
 
-        dataObj.setParticularTaskDataById(uniqueId, title, dueDate, desc, priority, project);
+        dataObj.setParticularTaskDataById(
+            uniqueId,
+            title,
+            dueDate,
+            desc,
+            priority,
+            project
+        );
 
-        location.reload()
-    }
+        location.reload();
+    };
 
     const createNewProject = () => {
         const project = dataObj.getDataFromNewProjectForm();
@@ -135,10 +159,18 @@ const Task = () => {
                 location.reload();
             } else {
                 localStorage.setItem(project.toLowerCase(), "{}");
-                alert("Project has been successfuly created!")
+                alert("Project has been successfuly created!");
                 domObj.closeAddNewProjectForm();
                 location.reload();
             }
+        }
+    };
+
+    const isTaskCompleted = (e) => {
+        const isChecked = e.target.checked;
+        if (isChecked) {
+            dataObj.deleteLocalTask(e.target.getAttribute("data-unique-id"));
+            alert("Task completed!! Keep up the work!! You can do this!!");
         }
     }
     return {
@@ -147,7 +179,7 @@ const Task = () => {
         renderLocalTask,
         deleteOldTask,
         updateTask,
-        createNewProject
+        createNewProject,
     };
 };
 
