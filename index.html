@@ -146,11 +146,11 @@
                 <div class=" flex flex-col gap-4 mb-2">
                     <div class="flex  text-xl gap-3">
                         <img alt="inbox icon" class="h-[16px] w-[16px] inbox-icon">
-                        <span>Inbox</span>
+                        <span class="inbox-section-btn cursor-pointer">Inbox</span>
                     </div>
                     <div class=" flex text-xl gap-3">
                         <img alt="calender icon" class="h-[16px] w-[16px] today-icon">
-                        <span>Today</span>
+                        <span class="today-section-btn cursor-pointer">Today</span>
                     </div>
                 </div>
                 <div>
@@ -170,9 +170,13 @@
                 </div>
             </div>
             <div class="min-h-full w-3/4 flex-auto">
-                <div class="date-time-section text-gray-800 h-[10%]"></div>
+                <div class=" flex flex-col justify-between">
+                    <div class="section-title text-gray-800 text-4xl"></div>
+                    <div class="date-time-section text-gray-800 h-[10%]"></div>
+
+                </div>
                 <div
-                    class="tasks-grid-container h-[90%] grid grid-cols-1 auto-rows-[minmax(0,_110px)] justify-items-center overflow-auto">
+                    class="tasks-grid-general-container h-[90%] grid grid-cols-1 auto-rows-[minmax(0,_110px)] justify-items-center overflow-auto">
                 </div>
             </div>
         </div>
