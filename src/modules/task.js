@@ -1,5 +1,5 @@
 import { Data } from "./data";
-import { Dom } from "./dom";
+import { domObj } from "./dom";
 import { v4 as uuidv4 } from "uuid";
 import { format } from "date-fns";
 
@@ -11,30 +11,48 @@ const Task = () => {
         return Object.keys(localStorage).length !== 0 ? true : false;
     };
 
-    const renderLocalTask = () => {
+    const renderTask = (task) => {
+        domObj.createTask(task);
+        domObj.setRadioColorAsPerPriority(task);
+        const checkTaskBtns = document.querySelectorAll(".task-checkbox");
+        checkTaskBtns.forEach((checkBtn) => {
+            checkBtn.addEventListener("click", isTaskCompleted);
+        });
+
+        const deleteTaskBtns = document.querySelectorAll(".delete-btn");
+        deleteTaskBtns.forEach((btn) => {
+            btn.addEventListener("click", deleteOldTask);
+        });
+
+        const editTaskBtns = document.querySelectorAll(".edit-task");
+        editTaskBtns.forEach((btn) => {
+            btn.addEventListener("click", domObj.fillFormFields);
+            btn.addEventListener("click", domObj.openUpdateTaskForm);
+        });
+    }
+
+    const rederTaskOnDateBase = (task, dateOfTask) => {
+        if (task.dueDate === dateOfTask) {
+            renderTask(task)
+        }
+    }
+
+    const renderTaskOnProjectBase = (task, projectName) => {
+        if (task.project === projectName) {
+            renderTask(task);
+        }
+    }
+    const renderLocalTask = (projectName, dateOfTask, isDateGiven) => {
         const localStorageKeys = Object.keys(localStorage);
         localStorageKeys.forEach((key) => {
             let tasks = dataObj.convertStringToObject(localStorage[key]);
             let tasksKeys = Object.keys(tasks);
             tasksKeys.forEach((key) => {
-                domObj.createTask(tasks[key]);
-                domObj.setRadioColorAsPerPriority(tasks[key]);
-
-                const checkTaskBtns = document.querySelectorAll(".task-checkbox");
-                checkTaskBtns.forEach((checkBtn) => {
-                    checkBtn.addEventListener("click", isTaskCompleted);
-                });
-
-                const deleteTaskBtns = document.querySelectorAll(".delete-btn");
-                deleteTaskBtns.forEach((btn) => {
-                    btn.addEventListener("click", deleteOldTask);
-                });
-
-                const editTaskBtns = document.querySelectorAll(".edit-task");
-                editTaskBtns.forEach((btn) => {
-                    btn.addEventListener("click", domObj.fillFormFields);
-                    btn.addEventListener("click", domObj.openUpdateTaskForm);
-                });
+                if (isDateGiven) {
+                    rederTaskOnDateBase(tasks[key], dateOfTask)
+                } else {
+                    renderTaskOnProjectBase(tasks[key], projectName)
+                }
             });
         });
     };
@@ -52,23 +70,25 @@ const Task = () => {
             checkOptionalFieldsHasData(myTask);
             myTask.uniqueId = uuidv4();
             dataObj.storeTasksLocally(myTask);
-            domObj.createTask(myTask);
+            if (myTask.project === 'general') {
+                domObj.createTask(myTask);
 
-            const checkTaskBtns = document.querySelectorAll(".task-checkbox");
-            checkTaskBtns.forEach((checkBtn) => {
-                checkBtn.addEventListener("click", isTaskCompleted);
-            });
-            const deleteTaskBtns = document.querySelectorAll(".delete-btn");
-            deleteTaskBtns.forEach((btn) => {
-                btn.addEventListener("click", deleteOldTask);
-            });
-            domObj.setRadioColorAsPerPriority(myTask);
+                const checkTaskBtns = document.querySelectorAll(".task-checkbox");
+                checkTaskBtns.forEach((checkBtn) => {
+                    checkBtn.addEventListener("click", isTaskCompleted);
+                });
+                const deleteTaskBtns = document.querySelectorAll(".delete-btn");
+                deleteTaskBtns.forEach((btn) => {
+                    btn.addEventListener("click", deleteOldTask);
+                });
+                domObj.setRadioColorAsPerPriority(myTask);
 
-            const editTaskBtns = document.querySelectorAll(".edit-task");
-            editTaskBtns.forEach((btn) => {
-                btn.addEventListener("click", domObj.fillFormFields);
-                btn.addEventListener("click", domObj.openUpdateTaskForm);
-            });
+                const editTaskBtns = document.querySelectorAll(".edit-task");
+                editTaskBtns.forEach((btn) => {
+                    btn.addEventListener("click", domObj.fillFormFields);
+                    btn.addEventListener("click", domObj.openUpdateTaskForm);
+                });
+            }
             domObj.closeForm("addTaskForm");
         }
     };
@@ -173,6 +193,7 @@ const Task = () => {
             alert("Task completed!! Keep up the work!! You can do this!!");
         }
     }
+
     return {
         createNewTask,
         isTaskPrsentLocally,
@@ -180,13 +201,16 @@ const Task = () => {
         deleteOldTask,
         updateTask,
         createNewProject,
+        renderLocalTask
     };
 };
+//
+const taskObj = Task()
 
-// Dom object
-const domObj = Dom();
+// // Dom object
+// const domObj = Dom();
 
 // Data object
 const dataObj = Data();
 
-export { Task };
+export { Task, taskObj };

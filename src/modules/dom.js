@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import { parseISO } from "date-fns";
 import { Data } from "./data";
 import { data } from "autoprefixer";
+import { da } from "date-fns/locale";
+import { taskObj } from "./task";
 const Dom = () => {
     const openForm = () => {
         const taskInputForm = document.querySelector(".task-input-form");
@@ -98,6 +100,7 @@ const Dom = () => {
     };
 
     const createTask = (task) => {
+
         const taskContainerClasses = [
             "border-b-2",
             "border-solid",
@@ -196,10 +199,9 @@ const Dom = () => {
 
         // Appending to the main parent
         document
-            .querySelector(".tasks-grid-container")
+            .querySelector(".tasks-grid-general-container")
             .appendChild(taskContainer);
-        // const parentGridContainer = document.querySelector(".tasks-grid-container");
-        // parentGridContainer.appendChild(taskContainer);
+
     };
 
     const renderDateAndTime = () => {
@@ -225,7 +227,7 @@ const Dom = () => {
         const projectSelectTag = document.querySelector(selectTag);
         const projects = Object.keys(localStorage);
         projects.forEach(project => {
-            if (isProjectOptionAlreadyPresent(selectTag ,project)) {
+            if (isProjectOptionAlreadyPresent(selectTag, project)) {
                 return;
             } else {
                 let optionTag = document.createElement("option");
@@ -237,7 +239,7 @@ const Dom = () => {
         });
     }
 
-    const isProjectOptionAlreadyPresent = (parentSelectTag ,project) => {
+    const isProjectOptionAlreadyPresent = (parentSelectTag, project) => {
         const allProjectOptionsValue = document.querySelectorAll(`${parentSelectTag} .project-options`);
         for (let i = 0; i < allProjectOptionsValue.length; i++) {
             if (allProjectOptionsValue[i].value === project) {
@@ -263,7 +265,7 @@ const Dom = () => {
         document.querySelector(arrowToHide).classList.add("hidden");
         document.querySelector(arrowToShow).classList.remove("hidden");
     }
-    
+
     const createProjectList = () => {
         const projectListSectionDiv = document.querySelector(".projects-section");
         const totalProjects = Object.keys(localStorage);
@@ -271,7 +273,7 @@ const Dom = () => {
             if (totalProjects[i] !== "general") {
                 const div = document.createElement('div');
                 const projectName = document.createElement('span');
-                projectName.textContent = totalProjects[i].charAt(0).toLocaleUpperCase()  + totalProjects[i].slice(1);
+                projectName.textContent = totalProjects[i].charAt(0).toLocaleUpperCase() + totalProjects[i].slice(1);
                 projectName.classList.add("text-[22px]");
                 const deleteImg = document.createElement('img');
                 deleteImg.src = deleteIcon;
@@ -279,14 +281,49 @@ const Dom = () => {
                 deleteImg.alt = totalProjects[i];
                 deleteImg.classList.add("w-[14px]", "h-[auto]", "cursor-pointer");
                 deleteImg.addEventListener('click', dataObj.deleteProject);
-    
-                div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]");
+
+                div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]", "cursor-pointer");
+                div.addEventListener("click", () => {openProjectSectionGrid(totalProjects[i])});
                 div.append(projectName, deleteImg);
-    
+
                 projectListSectionDiv.appendChild(div);
             }
         }
     }
+
+    const clearGrid = () => {
+        const taskGrid = document.querySelector(".tasks-grid-general-container");
+        while (taskGrid.hasChildNodes()) {
+            taskGrid.removeChild(taskGrid.firstChild);
+        }
+    }
+
+    const openProjectSectionGrid = (projectName) => {
+        const sectionTitleDiv = document.querySelector(".section-title");
+        if (projectName === 'general') {
+            sectionTitleDiv.textContent = "Inbox";
+        } else {
+            sectionTitleDiv.textContent = projectName.charAt(0).toUpperCase() + projectName.slice(1);
+        }
+        clearGrid();
+        taskObj.renderLocalTask(projectName, null, false);
+    }
+
+    const openTodaySectionGrid = () => {
+        const sectionTitleDiv = document.querySelector(".section-title");
+        sectionTitleDiv.textContent = "Today";
+        clearGrid();
+        taskObj.renderLocalTask(null, getTodayDate(), true);
+    }
+
+    const getTodayDate = () => {
+        let today = new Date();
+
+        let date = today.getFullYear() + '-' + (`0${today.getMonth() + 1}`) + '-' + today.getDate();
+        return date;
+    }
+
+
 
     return {
         openForm,
@@ -303,6 +340,9 @@ const Dom = () => {
         unHideProjectSection,
         hideProjectSection,
         createProjectList,
+        clearGrid,
+        openTodaySectionGrid,
+        openProjectSectionGrid
     };
 };
 

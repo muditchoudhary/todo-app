@@ -62,12 +62,12 @@ const Data = () => {
     };
 
     const storeTasksLocally = (task) => {
-            let tasksData = getLocalTasksData(task.project);
-            tasksData = convertStringToObject(tasksData);
-            let index = Object.keys(tasksData).length;
-            tasksData[index + 1] = task;
-            let tasksDataStringify = convertObjectToString(tasksData);
-            setLocalTaskData(task.project, tasksDataStringify);
+        let tasksData = getLocalTasksData(task.project);
+        tasksData = convertStringToObject(tasksData);
+        let index = Object.keys(tasksData).length;
+        tasksData[index + 1] = task;
+        let tasksDataStringify = convertObjectToString(tasksData);
+        setLocalTaskData(task.project, tasksDataStringify);
     };
 
     const deleteLocalTask = (id) => {
@@ -82,7 +82,12 @@ const Data = () => {
                 const task = tasks[tasksKeys[i]];
                 if (task.uniqueId === id) {
                     delete tasks[tasksKeys[i]];
+                    delete tasksKeys[i];
                     doesDeltedTaskFound = true;
+                    for (let k = i + 1; k < tasksKeys.length; k++) {
+                        tasks[k] = tasks[tasksKeys[k]];
+                        delete tasks[tasksKeys[k]];
+                    }
                     // Updating Local Storage
                     localStorage.setItem(
                         localStorageKeys[j],
