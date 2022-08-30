@@ -1,6 +1,7 @@
 import deleteIcon from "../assets/icons/delete-icon.svg";
 import editTaskIcon from "../assets/icons/edit-icon.svg";
 import { format } from "date-fns";
+import descriptionIcon from "../assets/icons/description.svg";
 import { parseISO } from "date-fns";
 import { Data } from "./data";
 import { data } from "autoprefixer";
@@ -163,21 +164,26 @@ const Dom = () => {
         dueDateSpan.classList.add(...dueDateSpanClasses);
 
         dueDateSpan.textContent = format(parseISO(task.dueDate), "PP");
-
-        // Edit Task Icon
         const taskIconClasses = [
             "h-auto",
             "w-4",
             "cursor-pointer",
-            "edit-task",
             "mr-[24px]"
         ];
+        // Description Icon
+        const descriptionIconImg = document.createElement("img");
+        descriptionIconImg.src = descriptionIcon;
+        descriptionIconImg.alt = "Description Icon";
+        descriptionIconImg.classList.add(...taskIconClasses, "description-btn");
+        descriptionIconImg.setAttribute("data-unique-id", task.uniqueId);
+        
+        // Edit Task Icon
         const editTaskIconElm = document.createElement("img");
         editTaskIconElm.src = editTaskIcon;
         editTaskIconElm.alt = "Edit Task Icon";
-        editTaskIconElm.classList.add(...taskIconClasses);
+        editTaskIconElm.classList.add(...taskIconClasses, "edit-task");
         editTaskIconElm.setAttribute("data-unique-id", task.uniqueId);
-
+        
         // Delte task Icon button
         const deleteTaskIcon = document.createElement("img");
         deleteTaskIcon.src = deleteIcon;
@@ -191,6 +197,7 @@ const Dom = () => {
         boxDiv1.append(checkBoxInput, taskDueDateBox);
 
         boxDiv2.append(
+            descriptionIconImg,
             editTaskIconElm,
             deleteTaskIcon
         );
@@ -323,6 +330,13 @@ const Dom = () => {
         return date;
     }
 
+    const showDescription = (e) => {
+        const uniqueId = e.target.getAttribute("data-unique-id");
+        const taskData = dataObj.getParticularTaskDataById(uniqueId);
+        const message = `Description\n----------------------------------------------\n\n${taskData.description}`;
+        alert(message);
+    }
+
 
 
     return {
@@ -342,7 +356,8 @@ const Dom = () => {
         createProjectList,
         clearGrid,
         openTodaySectionGrid,
-        openProjectSectionGrid
+        openProjectSectionGrid,
+        showDescription
     };
 };
 

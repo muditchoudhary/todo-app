@@ -5,9 +5,6 @@ import { format } from "date-fns";
 
 const Task = () => {
     const isTaskPrsentLocally = () => {
-        /**
-         * Check if tasks are present locally in localStorage
-         */
         return Object.keys(localStorage).length !== 0 ? true : false;
     };
 
@@ -17,6 +14,11 @@ const Task = () => {
         const checkTaskBtns = document.querySelectorAll(".task-checkbox");
         checkTaskBtns.forEach((checkBtn) => {
             checkBtn.addEventListener("click", isTaskCompleted);
+        });
+
+        const descriptionBtns = document.querySelectorAll(".description-btn");
+        descriptionBtns.forEach((btn) => {
+            btn.addEventListener("click", domObj.showDescription);
         });
 
         const deleteTaskBtns = document.querySelectorAll(".delete-btn");
@@ -58,13 +60,6 @@ const Task = () => {
     };
 
     const createNewTask = () => {
-        /**
-         * Get values from the form fields
-         * check if required filed has data otherwise raise an error
-         * check if optional field has data otherwise set the default data.
-         * Store the task into the localStorage
-         * Create a task element in the page
-         */
         const myTask = dataObj.getDatafromForm();
         if (checkRequiredFieldHasData(myTask) === true) {
             checkOptionalFieldsHasData(myTask);
@@ -77,17 +72,25 @@ const Task = () => {
                 checkTaskBtns.forEach((checkBtn) => {
                     checkBtn.addEventListener("click", isTaskCompleted);
                 });
+                
+                domObj.setRadioColorAsPerPriority(myTask);
+
+                const descriptionBtns = document.querySelectorAll(".description-btn");
+                descriptionBtns.forEach((btn) => {
+                    btn.addEventListener("click", domObj.showDescription);
+                });
+
                 const deleteTaskBtns = document.querySelectorAll(".delete-btn");
                 deleteTaskBtns.forEach((btn) => {
                     btn.addEventListener("click", deleteOldTask);
                 });
-                domObj.setRadioColorAsPerPriority(myTask);
-
+                
                 const editTaskBtns = document.querySelectorAll(".edit-task");
                 editTaskBtns.forEach((btn) => {
                     btn.addEventListener("click", domObj.fillFormFields);
                     btn.addEventListener("click", domObj.openUpdateTaskForm);
                 });
+                
             }
             domObj.closeForm("addTaskForm");
         }
