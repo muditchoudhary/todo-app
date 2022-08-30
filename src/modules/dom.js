@@ -112,6 +112,7 @@ const Dom = () => {
             "items-center",
             "justify-between",
             "p-3",
+            "2xl:pb-9"
         ];
         const taskContainer = document.createElement("div");
         taskContainer.classList.add(...taskContainerClasses);
@@ -139,7 +140,9 @@ const Dom = () => {
             "mr-3",
             "task-check-radio",
             "outline-none",
-            "task-checkbox"
+            "task-checkbox",
+            "2xl:w-7",
+            "2xl:h-7",
         ];
         const checkBoxInput = document.createElement("input");
         checkBoxInput.classList.add(...checkBoxInputClasses);
@@ -155,11 +158,11 @@ const Dom = () => {
 
         // Task Name
         const taskNameSpan = document.createElement("span");
-        taskNameSpan.classList.add("ml-2");
+        taskNameSpan.classList.add("ml-2", "2xl:text-3xl", "font-medium");
         taskNameSpan.textContent = task.title;
 
         // Task Due Date
-        const dueDateSpanClasses = ["task-due-date"];
+        const dueDateSpanClasses = ["task-due-date", "2xl:text-2xl", "font-light"];
         const dueDateSpan = document.createElement("span");
         dueDateSpan.classList.add(...dueDateSpanClasses);
 
@@ -168,7 +171,9 @@ const Dom = () => {
             "h-auto",
             "w-4",
             "cursor-pointer",
-            "mr-[24px]"
+            "mr-[24px]",
+            "2xl:mr-[32px]",
+            "2xl:w-7"
         ];
         // Description Icon
         const descriptionIconImg = document.createElement("img");
@@ -281,15 +286,15 @@ const Dom = () => {
                 const div = document.createElement('div');
                 const projectName = document.createElement('span');
                 projectName.textContent = totalProjects[i].charAt(0).toLocaleUpperCase() + totalProjects[i].slice(1);
-                projectName.classList.add("text-[22px]");
+                projectName.classList.add("text-[22px]", "2xl:text-4xl");
                 const deleteImg = document.createElement('img');
                 deleteImg.src = deleteIcon;
                 // Adding project name on delete icon alt, so that it can be use when deleting the project
                 deleteImg.alt = totalProjects[i];
-                deleteImg.classList.add("w-[14px]", "h-[auto]", "cursor-pointer");
+                deleteImg.classList.add("w-[14px]", "h-[auto]", "cursor-pointer", "2xl:w-[28px]");
                 deleteImg.addEventListener('click', dataObj.deleteProject);
 
-                div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]", "cursor-pointer");
+                div.classList.add("flex", "items-center", "justify-between", "border-b-2", "border-solid", "border-black", "h-[40px]", "cursor-pointer", "2xl:pb-6" );
                 div.addEventListener("click", () => {openProjectSectionGrid(totalProjects[i])});
                 div.append(projectName, deleteImg);
 

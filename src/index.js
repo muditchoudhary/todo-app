@@ -84,6 +84,7 @@ domObject.addImagesSrcToElement(
 );
 domObject.addImagesSrcToElement(document.querySelector(".add-icon"), addIcon);
 
+
 // Render the project list in the sidebar
 domObject.createProjectList();
 

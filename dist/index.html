@@ -8,10 +8,10 @@
 </head>
 
 <body>
-    <div class="main-container flex-col h-screen">
+    <div class="main-container flex-col h-full">
         <!--  Form for taking task inputs and adding a new task -->
         <form action="#"
-            class="task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
+            class="task-input-form hidden grid-cols-2 grid-rows-5 absolute w-2/3 left-0 top-5 2xl:w-2/4 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
             <div class="col-span-2 text-5xl border-b-2 border-solid border-black flex justify-between max-h-14">
                 <span>New Task</span>
                 <button type="button" class="close h-min">X</button>
@@ -47,16 +47,15 @@
                     class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
                     <option value="" class="project-options">Select Project</option>
                 </select>
-                <!-- <input type="text" name="project" id="project" required
-                    class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5" /> -->
+               
             </div>
             <div class="col-span-2 flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black">
                 <button type="button"
-                    class="cancel bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-min w-1/6">
+                    class="cancel bg-red-500 hover:bg-red-700 text-gray-800 font-black py-2 px-4 rounded h-min w-1/6">
                     Cancel
                 </button>
                 <button type="button"
-                    class="confirm-add-task-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-min w-1/6">
+                    class="confirm-add-task-btn bg-green-500 hover:bg-green-700 text-gray-800 font-black py-2 px-4 rounded h-min w-1/6">
                     Add task
                 </button>
             </div>
@@ -97,10 +96,7 @@
                 <label for="update-task-project" class="text-3xl">Project:</label>
                 <select name="update-task-project" id="update-task-project" required
                     class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5">
-                    <!-- <option value="">Select Priority</option> -->
                 </select>
-                <!-- <input type="text" name="project" id="update-task-project" required
-                    class="required:border-red-500 valid:border-green-500 w-4/5 text-xl p-1.5" /> -->
             </div>
             <div class="col-span-2 flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black">
                 <button type="button"
@@ -114,9 +110,9 @@
             </div>
         </form>
         <!-- Form for Add a new project -->
-        <form action="#" class="new-project-input-form hidden grid-cols-1 grid-rows-3 absolute w-2/5
-         left-0 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
-            <div class="text-3xl border-b-2 border-solid border-black flex justify-between items-center max-h-14">
+        <form action="#" class="new-project-input-form hidden grid-cols-1 grid-rows-3 absolute w-2/5 2xl:w-1/3
+         left-0 top-5 right-0 mx-auto bg-white rounded-lg shadow-lg shadow-black border-2 border-black p-3 gap-4">
+            <div class="text-3xl 2xl:text-4xl border-b-2 border-solid border-black flex justify-between items-center max-h-14">
                 <span>New Project</span>
                 <button type="button" class="new-project-form-close h-min">X</button>
             </div>
@@ -127,56 +123,56 @@
             </div>
             <div class="flex justify-end gap-4 w-[90%] items-end h-14 border-t-2 border-black">
                 <button type="button"
-                    class="new-project-form-cancel bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded h-min w-max">
+                    class="new-project-form-cancel bg-red-500 hover:bg-red-700 text-gray-800 font-black py-2 px-4 rounded h-min w-max">
                     Cancel
                 </button>
                 <button type="button"
-                    class="confirm-add-project-btn bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded h-min w-max">
+                    class="confirm-add-project-btn bg-green-500 hover:bg-green-700 text-gray-800 font-black py-2 px-4 rounded h-min w-max">
                     Add Project
                 </button>
             </div>
         </form>
 
-        <div class="topbar h-[10%] bg-gray-800 flex justify-between items-center p-3 flex-auto text-white">
-            <div class=" text-2xl">To Do</div>
-            <button class="add-task text-2xl">Add task</button>
+        <div class="topbar h-[10%] bg-gray-800 flex justify-between items-center p-3 2xl:p-5 flex-auto text-white">
+            <div class=" text-2xl 2xl:text-3xl font-bold ">To Do</div>
+            <button class="add-task text-2xl 2xl:text-3xl">Add task</button>
         </div>
-        <div class="h-[90%] flex flex-auto">
-            <div class=" border-2 border-gray-600 w-1/4 flex-auto p-3">
-                <div class=" flex flex-col gap-4 mb-2">
+        <div class="h-[80%] flex flex-auto">
+            <div class=" border-2 border-gray-600 w-1/4 flex-auto p-3 2xl:py-6 2xl:px-4 h-[91vh]">
+                <div class=" flex flex-col gap-4 mb-2 2xl:gap-6 2xl:mb-9">
                     <div class="flex  text-xl gap-3">
-                        <img alt="inbox icon" class="h-[16px] w-[16px] inbox-icon">
-                        <span class="inbox-section-btn cursor-pointer">Inbox</span>
+                        <img alt="inbox icon" class="h-[16px] w-[16px] 2xl:h-[28px] 2xl:w-[28px] inbox-icon">
+                        <span class="inbox-section-btn cursor-pointer 2xl:text-4xl">Inbox</span>
                     </div>
                     <div class=" flex text-xl gap-3">
-                        <img alt="calender icon" class="h-[16px] w-[16px] today-icon">
-                        <span class="today-section-btn cursor-pointer">Today</span>
+                        <img alt="calender icon" class="h-[16px] w-[16px] 2xl:h-[28px] 2xl:w-[28px] today-icon">
+                        <span class="today-section-btn cursor-pointer 2xl:text-4xl">Today</span>
                     </div>
                 </div>
                 <div>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center 2xl:mb-6">
                         <div class=" flex text-xl gap-3 items-center">
-                            <img alt="right arrow icon" class="h-[16px] w-[16px] right-arrow-icon cursor-pointer">
-                            <img alt="down arrow icon" class="h-[16px] w-[16px] down-arrow-icon cursor-pointer hidden">
-                            <span>Projects</span>
+                            <img alt="right arrow icon" class="h-[16px] w-[16px] 2xl:h-[28px] 2xl:w-[28px] right-arrow-icon cursor-pointer">
+                            <img alt="down arrow icon" class="h-[16px] w-[16px] 2xl:h-[28px] 2xl:w-[28px] down-arrow-icon cursor-pointer hidden">
+                            <span class=" 2xl:text-4xl">Projects</span>
                         </div>
                         <div class=" cursor-pointer">
-                            <img alt="plus icon" class="h-[16px] w-[16px] add-icon add-new-project">
+                            <img alt="plus icon" class="h-[16px] w-[16px] 2xl:h-[28px] 2xl:w-[28px] add-icon add-new-project">
                         </div>
 
                     </div>
-                    <div class="projects-section flex-col justify-start gap-[9%] py-[9%] px-4 h-[340px] border-2 border-solid border-gray-700 shadow-md hidden overflow-y-auto">
+                    <div class="projects-section flex-col justify-start gap-[9%] 2xl:gap-[12%] py-[9%] px-4 h-[340px] 2xl:h-[480px] border-2 border-solid border-gray-700 shadow-md hidden overflow-y-auto">
                     </div>
                 </div>
             </div>
-            <div class="min-h-full w-3/4 flex-auto">
-                <div class=" flex flex-col justify-between">
-                    <div class="section-title text-gray-800 text-4xl"></div>
-                    <div class="date-time-section text-gray-800 h-[10%]"></div>
+            <div class="min-h-full w-3/4 flex-auto h-[91vh]">
+                <div class=" flex flex-col justify-between gap-4 p-4 2xl:p-6">
+                    <div class="section-title text-gray-800 text-5xl 2xl:text-6xl"></div>
+                    <div class="date-time-section text-gray-800 h-[10%] text-lg 2xl:text-3xl"></div>
 
                 </div>
                 <div
-                    class="tasks-grid-general-container h-[90%] grid grid-cols-1 auto-rows-[minmax(0,_110px)] justify-items-center overflow-auto">
+                    class="tasks-grid-general-container h-[80%] grid grid-cols-1 auto-rows-[minmax(110px,_110px)] 2xl:auto-rows-[minmax(140px,_140px)] justify-items-center overflow-auto 2xl:mt-6 2xl:p-6">
                 </div>
             </div>
         </div>
