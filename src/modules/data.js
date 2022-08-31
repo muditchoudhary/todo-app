@@ -175,7 +175,6 @@ const Data = () => {
         dataValue === "None"
             ? (document.querySelector(`#${field}`).value = "")
             : (document.querySelector(`#${field}`).value = dataValue);
-        // console.log(document.querySelector(`#${field}`));
     };
 
     const getParticularFormFieldData = (field) => {
@@ -186,7 +185,6 @@ const Data = () => {
 
     const setCurrentTaskUniqueId = (id) => {
         currentTaskUniqueId = id;
-        console.log(getCurrentTaskUniqueId());
     };
 
     const getCurrentTaskUniqueId = () => {

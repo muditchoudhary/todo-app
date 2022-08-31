@@ -77,7 +77,6 @@ const Dom = () => {
         const radioBtn = document.body.querySelector(
             `[data-unique-id="${task.uniqueId}"] .task-check-radio`
         );
-        console.log(radioBtn);
         const radioBtnBorderColorClasses = [
             "border-gray-600",
             "border-red-600",
